@@ -1,0 +1,17 @@
+<mat-table #table [dataSource]="room" class="example-table" matSort matSortActive="created" matSortDisableClear>
+
+    <!-- firstName Column -->
+    <ng-container matColumnDef="room">
+      <mat-header-cell *matHeaderCellDef></mat-header-cell>
+      <mat-cell *matCellDef="let element">{{element.name}}</mat-cell>
+    </ng-container>
+
+    <!-- lastName Column -->
+    <ng-container *ngFor="let col of displayedColumns |slice:1" [matColumnDef]="days">
+      <mat-header-cell *matHeaderCellDef>{{col}} </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.beds}} </mat-cell>
+    </ng-container>
+
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+  </mat-table>
