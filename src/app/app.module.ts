@@ -6,10 +6,15 @@ import { AppComponent } from './app.component';
 import { MaterialModule } from './material/material.module';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { ReservationsTableComponent } from './reservations-table/reservations-table.component';
+import { DataService } from './data.service';
+import { RoomComponent } from './room/room.component';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    ReservationsTableComponent,
+    RoomComponent
   ],
   imports: [
     BrowserModule,
@@ -20,7 +25,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     ReactiveFormsModule,
     CommonModule
   ],
-  providers: [],
+  providers: [DataService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
