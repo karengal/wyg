@@ -1,0 +1,53 @@
+.example-container {
+    display: flex;
+    flex-direction: column;
+    max-height: 500px;
+    min-width: 300px;
+  }
+  
+  .dates {
+    text-align: center;
+  }
+
+  .mat-table {
+    overflow: auto;
+    max-height: 500px;
+  }
+
+  mat-header-row{
+      display: none;
+  }
+
+  .mat-cell {
+      margin: 10px 0;
+      overflow: auto;
+/*       background-color: red
+ */
+  }
+
+  .mat-header-cell {
+    overflow: auto;
+  }
+
+  mat-cell mat-cell{
+    line-height: 25px;
+  }
+
+  .cellWidth{
+    flex: 0 0 5%;
+  }
+
+  .cellDateWidth {
+    flex: 0 0 100px;
+    overflow: auto;
+    background-color: yellow !important;
+  }
+
+  ng-container {
+    flex-wrap: nowrap;
+    overflow-x: auto;
+  }
+
+  mat-table {
+    width: 3000px;
+  }

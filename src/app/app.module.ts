@@ -9,12 +9,14 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ReservationsTableComponent } from './reservations-table/reservations-table.component';
 import { DataService } from './data.service';
 import { RoomComponent } from './room/room.component';
+import { TableTestComponent } from './table-test/table-test.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     ReservationsTableComponent,
-    RoomComponent
+    RoomComponent,
+    TableTestComponent
   ],
   imports: [
     BrowserModule,

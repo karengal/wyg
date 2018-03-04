@@ -7,14 +7,20 @@ import {MatTableDataSource} from '@angular/material';
   styleUrls: ['./room.component.css']
 })
 export class RoomComponent implements OnInit {
-@Input() room: any;
+@Input() room;
 @Input() displayedColumns;
+dataSource;
 daysInMonth: Array<number>;
+arrayOfRoom = new Array();
   constructor() { }
 
   ngOnInit() {
     console.log(this.room);
- this.daysInMonth = this.displayedColumns.shift();
+ this.displayedColumns.shift();
+ this.daysInMonth = this.displayedColumns;
+ this.arrayOfRoom.push(this.room);
+ this.dataSource = this.arrayOfRoom;
+ console.log(this.dataSource);
   }
 
 }
