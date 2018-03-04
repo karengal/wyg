@@ -1,0 +1,28 @@
+<form [formGroup]="form" (ngSubmit)="submit(form)">
+    <h1 mat-dialog-title>Add Room</h1>
+    <mat-dialog-content>
+      <mat-form-field>
+        <input matInput formControlName="name" placeholder="Enter Room Name">
+      </mat-form-field>
+      <mat-form-field>
+        <input matInput formControlName="category" placeholder="Category">
+      </mat-form-field>
+      <mat-form-field>
+        <textarea matInput formControlName="description" placeholder="Description goes here . . .">
+      </mat-form-field>
+      <mat-form-field>
+        <input matInput formControlName="bedNum" placeholder="Number of Beds" pattern="^(\d?[1-9]|[1-9]0)$">
+      </mat-form-field>
+      <mat-form-field>
+          <mat-select placeholder="category" formControlName="category">
+            <mat-option value="Dormitory">Dormitory</mat-option>
+            <mat-option value="Private">Private</mat-option>
+            <mat-option value="Apartments">Apartments</mat-option>
+          </mat-select>
+      </mat-form-field>
+    </mat-dialog-content>
+    <mat-dialog-actions>
+      <button mat-button type="submit">Add</button>
+      <button mat-button type="button" mat-dialog-close>Cancel</button>
+    </mat-dialog-actions>
+</form>
