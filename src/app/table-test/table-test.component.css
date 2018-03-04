@@ -34,7 +34,7 @@
   }
 
   .cellWidth{
-    flex: 0 0 5%;
+    flex: 0 0 7%;
   }
 
   .cellDateWidth {
@@ -50,4 +50,8 @@
 
   mat-table {
     width: 3000px;
+  }
+
+  p {
+    max-width: 80%;
   }
