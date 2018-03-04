@@ -7,7 +7,7 @@ $custom-theme-accent: mat-palette($mat-light-blue, A200, A100, A400);
 $custom-theme-warn: mat-palette($mat-red);
 $custom-theme-background: mat-palette($mat-light-blue, 200, 300);
 
-$custom-theme: mat-dark-theme($custom-theme-primary, $custom-theme-accent, $custom-theme-warn);
+$custom-theme: mat-light-theme($custom-theme-primary, $custom-theme-accent, $custom-theme-warn);
 
 .main-theme {
     @include angular-material-theme($custom-theme);

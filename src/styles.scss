@@ -9,19 +9,29 @@
     position: relative;
 }
 
-.celDatelWidth {
+.celDatelWidth div {
     vertical-align: middle;
     border-right: 1px solid rgba(255, 255, 255, 0.40);
     text-align: center;
 }
+
+.mat-header-cell {
+    text-transform: capitalize; 
+}
+
+.celDatelWidth {
+    text-align: center;
+    vertical-align: middle;
+}
+
 .example-container {
     background-color: mat-color($custom-theme-primary);
     color: white;
 }
 
 html, body, app-root, .app-frame {
-    overflow: hidden;
-    margin: 0;
+/*     overflow: hidden;
+ */    margin: 0;
     height: 100%;
     box-sizing: border-box;
     color: #e0e0e0;
@@ -30,7 +40,7 @@ html, body, app-root, .app-frame {
 
 .table-wrap {
     max-width: 80%;
-    overflow-x: scroll;
+    overflow: scroll;
 }
 
 /* .scrollbar {
@@ -43,24 +53,4 @@ html, body, app-root, .app-frame {
 
 .force-overflow {
     min-height: 450px;
-}
-
-#style::-webkit-scrollbar-track {
-    box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
-	-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
-	background-color: #F5F5F5;
-}
-
-#style::-webkit-scrollbar {
-	width: 6px;
-	background-color: #F5F5F5;
-}
-
-#style::-webkit-scrollbar-thumb {
-	background-color: #000000;
-}
-
-#style::-webkit-scrollbar {
-	width: 10px;
-	background-color: #F5F5F5;
 }

@@ -19,17 +19,28 @@ displayedColumns: any[] = ['room'];
     return this.http.get<RoomModel[]>('api/reservationsTable');
   }
 
+getToday(){
+  let today = new Date();
+var day = today.getDate();
+var month = today.getMonth()+1;
+var year = today.getFullYear();
+return {day: day, month: month, year: year};
+}
+
   daysColGenerator(){
-    function daysInMonth (month, year) { // Use 1 for January, 2 for February, etc.
+    function daysInMonth (month, year) {
       return new Date(year, month, 0).getDate();
      };
-     let N = daysInMonth(1, 2013);
+     let today = this.getToday();
+     let N = daysInMonth(today.month, today.year);
      let array = new Array(N)
      this.numbersArray = array.fill(0).map((e, i) => {return (i+1).toString()});
-     console.log(this.numbersArray);
+     this.numbersArray.splice(0, this.numbersArray.indexOf(today.day.toString()));
      for (let i = 0; i < this.numbersArray.length; i++){
-       let n = new Date(2013, 1,this.numbersArray[i]).getDay();
+       let n = new Date(today.year, today.month-1,this.numbersArray[i]).getDay();
+       console.log(n);
        this.displayedColumns.push(this.numbersArray[i]);
+       console.log(this.displayedColumns);
        let obj;
        if (n == 0){
          obj = {num: this.numbersArray[i], day:'sunday'}

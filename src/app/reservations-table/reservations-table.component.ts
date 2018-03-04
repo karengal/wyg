@@ -18,7 +18,7 @@ export class ReservationsTableComponent implements OnInit {
   numbersObjArray = new Array();
   numbersArray = new Array();
   dataSource;
-  displayedColumns: any[] = ['room'];
+  displayedColumns: any[]
 /*   dataSource= new MatTableDataSource();
  */@Input() month: {month: number, year: number};
 rooms: RoomModel[];
@@ -60,45 +60,9 @@ rooms: RoomModel[];
   }
 
 daysColGenerator(){
-  this.numbersArray = this.dataService.daysColGenerator().numbersArray;
-  this.numbersObjArray = this.dataService.daysColGenerator().numbersObjArray;
-  this.displayedColumns = this.dataService.daysColGenerator().displayedColumns;
-  console.log('a ', this.numbersArray);
-  console.log('b ', this.numbersObjArray);
-  console.log('c ', this.displayedColumns);
-
+  let generatorObj = this.dataService.daysColGenerator()
+  this.numbersArray = generatorObj.numbersArray;
+  this.numbersObjArray = generatorObj.numbersObjArray;
+  this.displayedColumns = generatorObj.displayedColumns;
 }
-
-  /* daysColGenerator(){
-    function daysInMonth (month, year) { // Use 1 for January, 2 for February, etc.
-      return new Date(year, month, 0).getDate();
-     };
-     let N = daysInMonth(1, 2013);
-     let array = new Array(N)
-     this.numbersArray = array.fill(0).map((e, i) => {return (i+1).toString()});
-     console.log(this.numbersArray);
-     for (let i = 0; i < this.numbersArray.length; i++){
-       let n = new Date(2013, 1,this.numbersArray[i]).getDay();
-       this.displayedColumns.push(this.numbersArray[i]);
-       let obj;
-       if (n == 0){
-         obj = {num: this.numbersArray[i], day:'Sunday'}
-       } else if (n == 1){
-         obj = {num: this.numbersArray[i], day:'Monday'}
-       } else if (n == 2){
-         obj = {num: this.numbersArray[i], day:'Tuesday'}
-       } else if (n == 3){
-         obj = {num: this.numbersArray[i], day:'Wednesday'}
-       }else if (n == 4){
-         obj = {num: this.numbersArray[i], day:'Thursday'}
-       }else if (n == 5){
-         obj = {num: this.numbersArray[i], day:'Friday'}
-       }else if (n == 6){
-         obj = {num: this.numbersArray[i], day:'Saturday'}
-       }
-       this.numbersObjArray.push(obj);
-     }
-     console.log(this.displayedColumns);
-     console.log(this.numbersArray);
-  } */
 }
