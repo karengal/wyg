@@ -1,4 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
+import { RoomModel } from '../models/RoomModel';
 
 
 @Component({
@@ -10,7 +11,7 @@ export class TableTestComponent implements OnInit {
 
   constructor() { }
     /* displayedColumns = ['position', 'name', 'weight', 'symbol']; */
-  @Input() dataSource;
+  @Input() dataSource: RoomModel;
   @Input() columns;
   @Input() numbersArray;
   dataSourceArray = new Array();;
@@ -21,6 +22,7 @@ export class TableTestComponent implements OnInit {
   ngOnInit() {
 this.dataSourceArray.push(this.dataSource)
     this.displayedColumns = this.columns;
+    console.log(this.dataSource);
     console.log(this.displayedColumns);
 /*     this.dataSource = ELEMENT_DATA;
  */  }

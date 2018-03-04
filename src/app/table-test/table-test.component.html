@@ -10,7 +10,7 @@
         <mat-cell [ngClass]="'cellWidth'" *matCellDef="let element">
            <h1>{{element.name}} </h1>
            <h3>{{element.category}}</h3>
-           <p>{{element.desc}}</p>
+           <p>{{element.description}}</p>
         </mat-cell>
       </ng-container>
   
@@ -19,9 +19,7 @@
       <ng-container matColumnDef={{col.num}}>
         <mat-header-cell [ngClass]="'celDatelWidth'" *matHeaderCellDef>  </mat-header-cell>
         <mat-cell  [ngClass]="'celDatelWidth'" *matCellDef="let element">
-          <mat-cell [ngClass]="'celDatelWidth'" *ngFor="let bed of element.beds">{{bed.bed}}
-            <br>
-          </mat-cell>
+          <mat-cell [ngClass]="'celDatelWidth'" *ngFor="let bed of element.beds"><div>{{bed.bedNum}}<br></div></mat-cell>
         </mat-cell>
       </ng-container>
     </div>
