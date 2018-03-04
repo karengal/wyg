@@ -1,20 +1,53 @@
 import { Injectable } from '@angular/core';
 import { of as observableOf } from 'rxjs/observable/of';
+import { HttpClient, HttpParams } from '@angular/common/http';
+import { Observable } from 'rxjs/Observable';
+import { RoomModel } from './models/RoomModel';
 
-
-const ROOMS = 
-  [{name:'1', category:'some category', desc:'some description', beds: [{bed:1}, {bed:2}, {bed:3}, {bed:4}, {bed:5}, {bed:6}]},
-  {name:'2', category:'some category', desc:'some description', beds: [{bed:1}, {bed:2}]},
-  {name:'3', category:'some category', desc:'some description', beds: [{bed:1}, {bed:2}, {bed:3}, {bed:4}]}
-]
 
 @Injectable()
 export class DataService {
 rooms: Array<{name:string, category:string, desc: string, beds: any[]}>;
-  constructor() { }
+numbersObjArray = new Array();
+numbersArray = new Array();
+displayedColumns: any[] = ['room'];
+  constructor(private http: HttpClient) { }
 
-  getRooms(){
-    this.rooms = ROOMS;
-    return observableOf(this.rooms);
+  getRooms(): Observable<RoomModel[]>{
+/*     this.rooms = ROOMS;
+    return observableOf(this.rooms); */
+    return this.http.get<RoomModel[]>('api/reservationsTable');
+  }
+
+  daysColGenerator(){
+    function daysInMonth (month, year) { // Use 1 for January, 2 for February, etc.
+      return new Date(year, month, 0).getDate();
+     };
+     let N = daysInMonth(1, 2013);
+     let array = new Array(N)
+     this.numbersArray = array.fill(0).map((e, i) => {return (i+1).toString()});
+     console.log(this.numbersArray);
+     for (let i = 0; i < this.numbersArray.length; i++){
+       let n = new Date(2013, 1,this.numbersArray[i]).getDay();
+       this.displayedColumns.push(this.numbersArray[i]);
+       let obj;
+       if (n == 0){
+         obj = {num: this.numbersArray[i], day:'sunday'}
+       } else if (n == 1){
+         obj = {num: this.numbersArray[i], day:'monday'}
+       } else if (n == 2){
+         obj = {num: this.numbersArray[i], day:'tuesday'}
+       } else if (n == 3){
+         obj = {num: this.numbersArray[i], day:'wednesday'}
+       }else if (n == 4){
+         obj = {num: this.numbersArray[i], day:'thursday'}
+       }else if (n == 5){
+         obj = {num: this.numbersArray[i], day:'friday'}
+       }else if (n == 6){
+         obj = {num: this.numbersArray[i], day:'saterday'}
+       }
+       this.numbersObjArray.push(obj);
+     }
+     return {numbersObjArray: this.numbersObjArray, numbersArray: this.numbersArray, displayedColumns: this.displayedColumns }
   }
 }
