@@ -1,0 +1,26 @@
+/* You can add global styles to this file, and also import other style files */
+@import "~@angular/material/prebuilt-themes/indigo-pink.css";
+
+.mat-table {
+    display: table;
+    width: 100%;
+}
+/* .mat-table .mat-header-row, .mat-row {
+        display: table-row;
+        padding: 0;
+        border: none;
+} */
+.celDatelWidth {
+    vertical-align: middle;
+    border-right: 1px solid rgba(0, 0, 0, 0.12);
+    text-align: center;
+}
+        /* 
+.celDatelWidth div {
+} */
+
+
+/* .celDatelWidth div:hover {
+    border-left: 1px solid rgba(0, 0, 0, 0.12);
+    border-right: 1px solid rgba(0, 0, 0, 0.12);
+} */

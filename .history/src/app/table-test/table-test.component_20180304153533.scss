@@ -3,7 +3,7 @@
     flex-direction: column;
     max-height: 500px;
     min-width: 300px;
- 
+    background-color: mat-color($primary)
   }
   
   .dates {
@@ -35,7 +35,7 @@
   }
 
   .cellWidth{
-    flex: 0 0 7%;
+    flex: 0 0 5%;
   }
 
   .cellDateWidth {
@@ -51,8 +51,4 @@
 
   mat-table {
     width: 3000px;
-  }
-
-  p {
-    max-width: 80%;
   }

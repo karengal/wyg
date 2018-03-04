@@ -7,7 +7,6 @@ import { catchError } from 'rxjs/operators/catchError';
 import { startWith } from 'rxjs/operators/startWith';
 import { switchMap } from 'rxjs/operators/switchMap';
 import { of as observableOf } from 'rxjs/observable/of';
-import { RoomModel } from '../models/RoomModel';
 
 @Component({
   selector: 'app-reservations-table',
@@ -21,55 +20,37 @@ export class ReservationsTableComponent implements OnInit {
   displayedColumns: any[] = ['room'];
 /*   dataSource= new MatTableDataSource();
  */@Input() month: {month: number, year: number};
-rooms: RoomModel[];
+rooms: any;
   constructor(private dataService: DataService) { }
 
   ngOnInit() {
+    console.log(this.dataService.getRooms());
     this.daysColGenerator();
     this.getRooms();
     console.log(this.rooms);
+    this.dataSource = this.rooms
     
  }
 
-/*   getRooms(){
+  getRooms(){
     this.dataService.getRooms()
     .pipe(
       startWith({}),
       switchMap(() => {
         return this.dataService.getRooms();
       }),
+/*       map(data => {
+        return data;
+      }), */
       catchError(() => {
         return observableOf([]);
       })
     ).subscribe(
-      data=>{
-        this.dataSource = data;
-        console.log('hhhiiii ',this.dataSource);
-      }
-    ),error=>console.log(error);
-  } */
-
-  getRooms(){
-    this.dataService.getRooms().subscribe(
-      data=>{
-        console.log(data); 
-      this.dataSource = data;
-      console.log(this.rooms);
-      }
+      data=>{this.rooms = data}
     ),error=>console.log(error)
   }
 
-daysColGenerator(){
-  this.numbersArray = this.dataService.daysColGenerator().numbersArray;
-  this.numbersObjArray = this.dataService.daysColGenerator().numbersObjArray;
-  this.displayedColumns = this.dataService.daysColGenerator().displayedColumns;
-  console.log('a ', this.numbersArray);
-  console.log('b ', this.numbersObjArray);
-  console.log('c ', this.displayedColumns);
-
-}
-
-  /* daysColGenerator(){
+  daysColGenerator(){
     function daysInMonth (month, year) { // Use 1 for January, 2 for February, etc.
       return new Date(year, month, 0).getDate();
      };
@@ -100,5 +81,5 @@ daysColGenerator(){
      }
      console.log(this.displayedColumns);
      console.log(this.numbersArray);
-  } */
+  }
 }

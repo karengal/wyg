@@ -1,0 +1,33 @@
+<div *ngIf="displayedColumns !== undefined" >
+    <mat-table #table [dataSource]="dataSourceArray" class="example-container mat-elevation-z8" color="primary">
+  
+      <!--- Note that these columns can be defined in any order.
+            The actual rendered columns are set as a property on the row definition" -->
+  
+      <!-- Position Column -->
+      <ng-container matColumnDef="room">
+        <mat-header-cell *matHeaderCellDef [ngClass]="'cellWidth'"> </mat-header-cell>
+        <mat-cell [ngClass]="'cellWidth'" *matCellDef="let element">
+           <h1>{{element.name}} </h1>
+           <h3>{{element.category}}</h3>
+           <p>{{element.desc}}</p>
+        </mat-cell>
+      </ng-container>
+  
+      <!-- Name Column -->
+      <div  *ngFor="let col of numbersArray">
+      <ng-container matColumnDef={{col.num}}>
+        <mat-header-cell [ngClass]="'celDatelWidth'" *matHeaderCellDef>  </mat-header-cell>
+        <mat-cell  [ngClass]="'celDatelWidth'" *matCellDef="let element">
+          <mat-cell [ngClass]="'celDatelWidth'" *ngFor="let bed of element.beds">{{bed.bed}}
+            <br>
+          </mat-cell>
+        </mat-cell>
+      </ng-container>
+    </div>
+
+  
+      <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+      <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+    </mat-table>
+  </div>

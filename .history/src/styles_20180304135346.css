@@ -1,0 +1,7 @@
+/* You can add global styles to this file, and also import other style files */
+@import "~@angular/material/prebuilt-themes/indigo-pink.css";
+
+.celDateWidth div {
+    border-left: 1px black solid;
+    border-right: 1px black solid;
+}
