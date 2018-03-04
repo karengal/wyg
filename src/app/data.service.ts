@@ -3,14 +3,14 @@ import { of as observableOf } from 'rxjs/observable/of';
 
 
 const ROOMS = 
-  [{name:'1', category:'some category', desc:'some description', beds: [1, 2, 3, 4, 5, 6]},
-  {name:'2', category:'some category', desc:'some description', beds: [1, 2]},
-  {name:'3', category:'some category', desc:'some description', beds: [1, 2, 3, 4]}
+  [{name:'1', category:'some category', desc:'some description', beds: [{bed:1}, {bed:2}, {bed:3}, {bed:4}, {bed:5}, {bed:6}]},
+  {name:'2', category:'some category', desc:'some description', beds: [{bed:1}, {bed:2}]},
+  {name:'3', category:'some category', desc:'some description', beds: [{bed:1}, {bed:2}, {bed:3}, {bed:4}]}
 ]
 
 @Injectable()
 export class DataService {
-rooms: any;
+rooms: Array<{name:string, category:string, desc: string, beds: any[]}>;
   constructor() { }
 
   getRooms(){
