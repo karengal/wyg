@@ -6,8 +6,4 @@ export class RoomModel{
     beds:[
         {bedNum:string, isAvailable: string}
     ]
-    
-    constructor(obj) {
-        for (let prop in obj) this[prop] = obj[prop];
-    }
 }

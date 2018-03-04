@@ -10,13 +10,17 @@ import { ReservationsTableComponent } from './reservations-table/reservations-ta
 import { DataService } from './data.service';
 import { RoomComponent } from './room/room.component';
 import { TableTestComponent } from './table-test/table-test.component';
+import { AddRoomDialogComponent } from './add-room-dialog/add-room-dialog.component';
+import { AddCategoryDialogComponent } from './add-category-dialog/add-category-dialog.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     ReservationsTableComponent,
     RoomComponent,
-    TableTestComponent
+    TableTestComponent,
+    AddRoomDialogComponent,
+    AddCategoryDialogComponent
   ],
   imports: [
     BrowserModule,
