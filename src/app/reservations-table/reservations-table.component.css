@@ -15,21 +15,14 @@
 
   .cellDateWidth {
     flex: 0 0 5%;
-    overflow: auto;
   }
 
   mat-cell {
     margin: 10px 0;
-    overflow: auto;
-}
-
-mat-header-cell {
-  overflow: auto;
 }
 
 ng-container {
   flex-wrap: nowrap;
-  overflow-x: scroll;
 }
 
 mat-table {
