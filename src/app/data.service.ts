@@ -14,10 +14,16 @@ displayedColumns: any[] = ['room'];
   constructor(private http: HttpClient) { }
 
   getRooms(): Observable<RoomModel[]>{
-/*     this.rooms = ROOMS;
-    return observableOf(this.rooms); */
     return this.http.get<RoomModel[]>('api/reservationsTable');
   }
+
+  addRoom(room): Observable<any>{
+return this.http.post<any>('api/reservationsTable', room);
+  };
+
+  getCategories(): Observable<{category_id: number, category_name: string}[]>{
+    return this.http.get<{category_id: number, category_name: string}[]>('api/reservationsTable/companies');
+  };
 
 getToday(){
   let today = new Date();

@@ -11,26 +11,26 @@ import { RoomModel } from '../models/RoomModel';
 export class AddRoomDialogComponent implements OnInit {
   form: FormGroup;
   constructor(private formBuilder: FormBuilder,
-              private dialogRef: MatDialogRef<AddRoomDialogComponent>) { }
+              private dialogRef: MatDialogRef<AddRoomDialogComponent>,
+              @Inject(MAT_DIALOG_DATA) public data: any) { }
 
   ngOnInit() {
     this.form = this.formBuilder.group({
-      room_id: this.generateId(),
       name: '',
       category: '',
       description: '',
-      beds: [{bedNum: '', isAvailable: true}],
+      beds: '',
     })
   }
-  private generateId() {
-    let n = Math.random() * 10000000;
-    return Math.floor(Math.random() * n);
-  };
 
   submit(form){
     let room = new RoomModel(form.value);
     console.log(room);
     this.dialogRef.close(room);
+  }
+
+  onOptionClick(){
+    console.log('clicked');
   }
 
 }

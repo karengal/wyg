@@ -1,28 +1,26 @@
 <form [formGroup]="form" (ngSubmit)="submit(form)">
     <h1 mat-dialog-title>Add Room</h1>
-    <mat-dialog-content>
+    <div mat-dialog-content>
       <mat-form-field>
         <input matInput formControlName="name" placeholder="Enter Room Name">
       </mat-form-field>
       <mat-form-field>
-        <input matInput formControlName="category" placeholder="Category">
+        <textarea matInput formControlName="description" placeholder="Description goes here . . ."></textarea>
       </mat-form-field>
       <mat-form-field>
-        <textarea matInput formControlName="description" placeholder="Description goes here . . .">
+        <input matInput formControlName="beds" placeholder="Number of Beds" pattern="^(\d?[1-9]|[1-9]0)$">
       </mat-form-field>
       <mat-form-field>
-        <input matInput formControlName="bedNum" placeholder="Number of Beds" pattern="^(\d?[1-9]|[1-9]0)$">
-      </mat-form-field>
-      <mat-form-field>
-          <mat-select placeholder="category" formControlName="category">
-            <mat-option value="Dormitory">Dormitory</mat-option>
-            <mat-option value="Private">Private</mat-option>
-            <mat-option value="Apartments">Apartments</mat-option>
+          <mat-select  placeholder="category" formControlName="category">
+            <mat-option *ngFor="let category of data.categories" [(value)]="category.category_id">
+              {{ category.category_name }}
+            </mat-option>
           </mat-select>
-      </mat-form-field>
-    </mat-dialog-content>
-    <mat-dialog-actions>
+        </mat-form-field>
+<!--         [(ngModel)] = "data.categories.company_id"-->
+    </div>
+    <div mat-dialog-actions>
       <button mat-button type="submit">Add</button>
       <button mat-button type="button" mat-dialog-close>Cancel</button>
-    </mat-dialog-actions>
+    </div>
 </form>

@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import {MatTableDataSource} from '@angular/material';
+import {MatTableDataSource, MatDialogRef, MatDialog} from '@angular/material';
 import { DataService } from '../data.service';
 import { catchError } from 'rxjs/operators/catchError';
 /* import { map } from 'rxjs/operators/map';
@@ -8,6 +8,7 @@ import { startWith } from 'rxjs/operators/startWith';
 import { switchMap } from 'rxjs/operators/switchMap';
 import { of as observableOf } from 'rxjs/observable/of';
 import { RoomModel } from '../models/RoomModel';
+import { AddRoomDialogComponent } from '../add-room-dialog/add-room-dialog.component';
 
 @Component({
   selector: 'app-reservations-table',
@@ -19,42 +20,51 @@ export class ReservationsTableComponent implements OnInit {
   numbersArray = new Array();
   dataSource;
   displayedColumns: any[]
+  categories: {category_id:number, category_name: string}[];
 /*   dataSource= new MatTableDataSource();
  */@Input() month: {month: number, year: number};
 rooms: RoomModel[];
-  constructor(private dataService: DataService) { }
+openDialogRef: MatDialogRef<AddRoomDialogComponent>;
+  constructor(private dataService: DataService, public dialog: MatDialog) { }
 
   ngOnInit() {
     this.daysColGenerator();
     this.getRooms();
     console.log(this.rooms);
+    this.getCatagories();
     
  }
 
-/*   getRooms(){
-    this.dataService.getRooms()
-    .pipe(
-      startWith({}),
-      switchMap(() => {
-        return this.dataService.getRooms();
-      }),
-      catchError(() => {
-        return observableOf([]);
-      })
-    ).subscribe(
-      data=>{
-        this.dataSource = data;
-        console.log('hhhiiii ',this.dataSource);
-      }
-    ),error=>console.log(error);
-  } */
+ getCatagories(){
+   this.dataService.getCategories().subscribe(
+     data=>{
+      console.log(data);
+      this.categories = data;
+     }
+   ),error=>console.log('error');
+ }
+
+ openDialog(){
+   this.openDialogRef = this.dialog.open(AddRoomDialogComponent, 
+      {data: {categories: this.categories }});
+   
+   this.openDialogRef
+   .afterClosed()
+   .subscribe(
+     result=> {
+       console.log(result);
+        this.dataService.addRoom(result).subscribe(
+          data=>console.log(data)
+        ),
+      error=>console.log('error')}
+   ),error=>console.log('error')
+ }
 
   getRooms(){
     this.dataService.getRooms().subscribe(
       data=>{
         console.log(data); 
       this.dataSource = data;
-      console.log(this.rooms);
       }
     ),error=>console.log(error)
   }

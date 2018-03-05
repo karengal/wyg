@@ -12,6 +12,7 @@ import { RoomComponent } from './room/room.component';
 import { TableTestComponent } from './table-test/table-test.component';
 import { AddRoomDialogComponent } from './add-room-dialog/add-room-dialog.component';
 import { AddCategoryDialogComponent } from './add-category-dialog/add-category-dialog.component';
+import { OverlayModule} from '@angular/cdk/overlay';
 
 @NgModule({
   declarations: [
@@ -29,9 +30,11 @@ import { AddCategoryDialogComponent } from './add-category-dialog/add-category-d
     MaterialModule,
     FormsModule,
     ReactiveFormsModule,
-    CommonModule
+    CommonModule,
+    OverlayModule
   ],
   providers: [DataService],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  entryComponents: [AddRoomDialogComponent, AddCategoryDialogComponent]
 })
 export class AppModule { }
