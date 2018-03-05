@@ -1,11 +1,11 @@
 <form [formGroup]="form" (ngSubmit)="submit(form)">
-    <h1 mat-dialog-title>Add Room</h1>
+    <h1 mat-dialog-title>Add Category</h1>
     <mat-dialog-content>
       <mat-form-field>
-        <input matInput formControlName="name" placeholder="Enter Category Name">
+        <input matInput formControlName="category_name" placeholder="Enter Category Name">
       </mat-form-field>
       <mat-form-field>
-          <mat-select placeholder="Room Type" formControlName="category">
+          <mat-select placeholder="Room Type" formControlName="room_type">
             <mat-option disabled="disabled" selected="selected">Pick Room Type</mat-option>
             <mat-option value="private">Private</mat-option>
             <mat-option value="shared">Shared</mat-option>

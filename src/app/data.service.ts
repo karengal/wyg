@@ -1,8 +1,10 @@
-import { Injectable } from '@angular/core';
+import { Injectable, EventEmitter} from '@angular/core';
 import { of as observableOf } from 'rxjs/observable/of';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs/Observable';
 import { RoomModel } from './models/RoomModel';
+import { CategoryModel } from './models/CategoryModel';
+
 
 
 @Injectable()
@@ -11,6 +13,7 @@ rooms: Array<{name:string, category:string, desc: string, beds: any[]}>;
 numbersObjArray = new Array();
 numbersArray = new Array();
 displayedColumns: any[] = ['room'];
+
   constructor(private http: HttpClient) { }
 
   getRooms(): Observable<RoomModel[]>{
@@ -24,6 +27,11 @@ return this.http.post<any>('api/reservationsTable', room);
   getCategories(): Observable<{category_id: number, category_name: string}[]>{
     return this.http.get<{category_id: number, category_name: string}[]>('api/reservationsTable/categories');
   };
+
+  addCategory(category): Observable<any>{
+    return this.http.post<any>('api/reservationsTable/categories', category);
+  }
+
 
 getToday(){
   let today = new Date();
