@@ -18,7 +18,7 @@ function toRoomModel(rows) {
             let bedsAvailableArray = rows[i].availableArray.split(',');
             console.log(bedsNumArray);
             console.log(bedsAvailableArray);
-            let room = { room_id: rows[i].room_id, name: rows[i].room_name, category: rows[i].category_name, description: rows[i].descText, beds: [] };
+            let room = { room_id: rows[i].room_id, name: rows[i].room_name, category: rows[i].category_name, description: rows[i].text, beds: [] };
             for (var z = 0; z < bedsNumArray.length; z++) {
                   let obj = { bedNum: bedsNumArray[z], isAvailable: bedsAvailableArray[z] };
                   room.beds.push(obj);
@@ -30,7 +30,7 @@ function toRoomModel(rows) {
 
 router.get('/', (req, res) => {
       console.log('requested');
-      db.query('SELECT beds.room_id, rooms.room_name, roomsDescription.descText, categories.category_name, group_concat(bed_number) as bedArray, group_concat(isAvailable) as availableArray from beds inner join rooms on beds.room_id=rooms.room_id inner join roomsDescription on rooms.description_id=roomsDescription.description_id inner join categories on rooms.category_id=categories.category_id group by room_id', function (err, rows, fields) {
+      db.query('SELECT beds.room_id, rooms.room_name, roomsDescription.text, categories.category_name, group_concat(bed_number) as bedArray, group_concat(isAvailable) as availableArray from beds inner join rooms on beds.room_id=rooms.room_id inner join roomsDescription on rooms.description_id=roomsDescription.description_id inner join categories on rooms.category_id=categories.category_id group by room_id', function (err, rows, fields) {
             if (!err) {
                   console.log(`This is rows ====== ${JSON.stringify(rows)}`);
                   toRoomModel(rows);
@@ -66,9 +66,9 @@ router.post('/categories', (req, res) => {
 
 router.post('/addroom', (req, res) => {
       console.log('this is req.body !!!! ' + JSON.stringify(req.body))
-      db.query(`CALL add_room('${req.body.description}', '${req.body.name}', ${req.body.category},${req.body.beds})`, function (err, result) {
+      db.query(`CALL add_room(${req.body.description}, ${req.body.name}, ${req.body.category},${req.body.beds})`, function (err, result) {
             if (!err) {
-                  res.send(result);
+                  res.send(rows);
             }
             else {
                   console.log(err)

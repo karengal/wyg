@@ -66,9 +66,9 @@ router.post('/categories', (req, res) => {
 
 router.post('/addroom', (req, res) => {
       console.log('this is req.body !!!! ' + JSON.stringify(req.body))
-      db.query(`CALL add_room('${req.body.description}', '${req.body.name}', ${req.body.category},${req.body.beds})`, function (err, result) {
+      db.query(`CALL add_room(${req.body.description}, ${req.body.name}, ${req.body.category},${req.body.beds})`, function (err, result) {
             if (!err) {
-                  res.send(result);
+                  res.send(rows);
             }
             else {
                   console.log(err)
