@@ -77,7 +77,7 @@ router.post('/addroom', (req, res) => {
       })
 })
 
-router.delete('/deleteroom/:roomId', (req, res) => {
+router.delete('deleteroom/:roomId', (req, res) => {
       console.log(req.params.roomId)
       db.query(`DELETE FROM rooms WHERE room_id = ${req.params.roomId}`, function (err, result){
             if (!err) {

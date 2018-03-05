@@ -33,10 +33,10 @@ return this.http.post<any>('api/reservationsTable/addroom', room);
   }
 
   editRoom(room):Observable<any>{
-    return this.http.put<any>(`api/reservationsTable/editroom/${room.id}`, room)
+    return this.http.put<any>(`api/reservationsTable/editRoom/${room.id}`, room)
   }
   deleteRoom(room):Observable<any>{
-    return this.http.delete<any>(`api/reservationsTable/deleteroom/${room}`)
+    return this.http.delete<any>(`api/reservationsTable/deleteRoom/${room.id}`)
   }
 
 

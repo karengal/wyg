@@ -85,7 +85,7 @@ export class ReservationsTableComponent implements OnInit {
     if (obj.mode === false){
       this.dataService.deleteRoom(obj.element).subscribe(
         data => {
-          console.log(data);
+          this.getRooms();
         }, error => console.log(error));
     } else {
       // this.openEditDialogRef = this.dialog.open(EditRoomComponent,

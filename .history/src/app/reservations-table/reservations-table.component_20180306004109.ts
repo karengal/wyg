@@ -80,13 +80,8 @@ export class ReservationsTableComponent implements OnInit {
   }
 
   handleEdit(obj: CustomEmitObj) {
-    console.log(obj);
-    console.log(obj.mode);
     if (obj.mode === false){
-      this.dataService.deleteRoom(obj.element).subscribe(
-        data => {
-          console.log(data);
-        }, error => console.log(error));
+      this.dataService.deleteRoom(obj.element);
     } else {
       // this.openEditDialogRef = this.dialog.open(EditRoomComponent,
       //   { data: { room: obj.element } });

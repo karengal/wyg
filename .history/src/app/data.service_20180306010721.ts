@@ -36,7 +36,8 @@ return this.http.post<any>('api/reservationsTable/addroom', room);
     return this.http.put<any>(`api/reservationsTable/editroom/${room.id}`, room)
   }
   deleteRoom(room):Observable<any>{
-    return this.http.delete<any>(`api/reservationsTable/deleteroom/${room}`)
+    console.log(`from dataservice delteroom room.id is -->  ${room.id}  `)
+    return this.http.delete<any>(`api/reservationsTable/deleteroom/${room.id}`)
   }
 
 
