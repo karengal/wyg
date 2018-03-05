@@ -12,7 +12,7 @@
       </mat-form-field>
       <mat-form-field>
           <mat-select  placeholder="category" formControlName="category">
-            <mat-option *ngFor="let category of data.categories" [(value)]="category.category_id">
+            <mat-option *ngFor="let category of categories" [(value)]="category.category_id">
               {{ category.category_name }}
             </mat-option>
             <mat-option (click)="openDialogCategories()" [(value)]="other">

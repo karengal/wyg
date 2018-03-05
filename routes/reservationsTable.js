@@ -32,12 +32,11 @@ function toRoomModel(rows){
 router.get('/', (req, res)=>{
       db.query('SELECT beds.room_id, rooms.room_name, roomsDescription.text, categories.category_name, group_concat(bed_number) as bedArray, group_concat(isAvailable) as availableArray from beds inner join rooms on beds.room_id=rooms.room_id inner join roomsDescription on rooms.description_id=roomsDescription.description_id inner join categories on rooms.category_id=categories.category_id group by room_id', function(err, rows, fields){
             if (!err) {
-                  console.log(rows);
+                  console.log(rows.length);
                   toRoomModel(rows);
-                  console.log(newArray);
                   res.send(newArray);
                      }
-            else console.log('error');
+            else console.log(err);
       })
       
  });
@@ -49,7 +48,7 @@ console.log(req.body);
  router.get('/categories', (req, res)=>{
        db.query('SELECT categories.category_id, categories.category_name from categories', function(err, rows, fields){
              if (!err) res.send(rows);
-             else console.log('error');
+             else console.log(err);
        })
  })
 

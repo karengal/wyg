@@ -13,6 +13,7 @@ rooms: Array<{name:string, category:string, desc: string, beds: any[]}>;
 numbersObjArray = new Array();
 numbersArray = new Array();
 displayedColumns: any[] = ['room'];
+addedCategory : EventEmitter<CategoryModel[]> = new EventEmitter();
 
   constructor(private http: HttpClient) { }
 
@@ -30,6 +31,14 @@ return this.http.post<any>('api/reservationsTable', room);
 
   addCategory(category): Observable<any>{
     return this.http.post<any>('api/reservationsTable/categories', category);
+  }
+
+  getAddedCategoryEmmiter(){
+    return this.addedCategory;
+  }
+
+  categoryWasAdded(){
+    this.addedCategory.emit();
   }
 
 

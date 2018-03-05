@@ -21,8 +21,8 @@ export class ReservationsTableComponent implements OnInit {
   numbersArray = new Array();
   dataSource;
   displayedColumns: any[]
-  categories: {category_id:number, category_name: string}[];
-rooms: RoomModel[];
+/*   categoriesObj= {data: {categories: new Array<{category_id:number, category_name: string}>()}};
+ */rooms: RoomModel[];
 openDialogRef: MatDialogRef<AddRoomDialogComponent>;
   constructor(private dataService: DataService, public dialog: MatDialog) { }
 
@@ -30,22 +30,24 @@ openDialogRef: MatDialogRef<AddRoomDialogComponent>;
     this.daysColGenerator();
     this.getRooms();
     console.log(this.rooms);
-    this.getCatagories();
+    /* this.getCatagories();
+    this.dataService.getAddedCategoryEmmiter().subscribe(
+      ()=>{this.getCatagories()}) */
     
  }
 
- getCatagories(){
+/*  getCatagories(){
    this.dataService.getCategories().subscribe(
      data=>{
       console.log(data);
-      this.categories = data;
+      this.categoriesObj.data.categories = data;
      }
    ),error=>console.log('error');
- }
+ } */
 
  openDialog(){
    this.openDialogRef = this.dialog.open(AddRoomDialogComponent, 
-      {data: {categories: this.categories }});
+      /* this.categoriesObj */);
    
    this.openDialogRef
    .afterClosed()
@@ -62,7 +64,7 @@ openDialogRef: MatDialogRef<AddRoomDialogComponent>;
   getRooms(){
     this.dataService.getRooms().subscribe(
       data=>{
-        console.log(data); 
+        console.log('hiiii ', data); 
       this.dataSource = data;
       }
     ),error=>console.log(error)
