@@ -5,7 +5,10 @@ var db = require('./db.js');
 let newArray = [];
 
 function toRoomModel(rows){
-      for (var i = 0; i < rows.length; i++){
+      for (let row of rows){
+            row.bedArray.sort();
+      }
+/*       for (var i = 0; i < rows.length; i++){
             let bedsNumArray = rows[i].bedArray.split(',');
             let bedsAvailableArray = rows[i].availableArray.split(',');
             let room = {room_id: rows[i].room_id, name: rows[i].room_name, category: rows[i].category_name, description: rows[i].text, beds:[] };
@@ -14,7 +17,7 @@ function toRoomModel(rows){
                   room.beds.push(obj);
             }
             newArray.push(room);
-      } 
+      }  */
 }
 
 router.get('/', (req, res)=>{
@@ -23,7 +26,7 @@ router.get('/', (req, res)=>{
             if (!err) {
                   console.log(`This is rows ====== ${JSON.stringify(rows)}`);
                   toRoomModel(rows);
-                  console.log(newArray);
+                  // console.log(newArray);
                   res.send(newArray);
                      }
             else console.log('error');

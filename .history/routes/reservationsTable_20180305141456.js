@@ -23,7 +23,7 @@ router.get('/', (req, res)=>{
             if (!err) {
                   console.log(`This is rows ====== ${JSON.stringify(rows)}`);
                   toRoomModel(rows);
-                  console.log(newArray);
+                  // console.log(newArray);
                   res.send(newArray);
                      }
             else console.log('error');

@@ -21,7 +21,7 @@ router.get('/', (req, res)=>{
       console.log('requested');
       db.query('SELECT beds.room_id, rooms.room_name, roomsDescription.text, categories.category_name, group_concat(bed_number) as bedArray, group_concat(isAvailable) as availableArray from beds inner join rooms on beds.room_id=rooms.room_id inner join roomsDescription on rooms.description_id=roomsDescription.description_id inner join categories on rooms.category_id=categories.category_id group by room_id', function(err, rows, fields){
             if (!err) {
-                  console.log(`This is rows ====== ${JSON.stringify(rows)}`);
+                  console.log(rows);
                   toRoomModel(rows);
                   console.log(newArray);
                   res.send(newArray);
