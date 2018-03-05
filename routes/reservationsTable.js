@@ -53,4 +53,15 @@ console.log(req.body);
        })
  })
 
+ router.post('/categories', (req, res)=>{
+      console.log(req.body);
+      db.query('INSERT INTO categories SET ?',{category_name: req.body.category_name, room_type: req.body.room_type}, function(err, rows, fields){
+            if (!err) {
+                  res.send(rows);
+                  console.log(rows);
+            }
+            else console.log(err);
+      } )
+ })
+
  module.exports = router;

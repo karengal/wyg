@@ -15,7 +15,7 @@
             <mat-option *ngFor="let category of data.categories" [(value)]="category.category_id">
               {{ category.category_name }}
             </mat-option>
-            <mat-option (click)="addCategory()" [(value)]="other">
+            <mat-option (click)="openDialogCategories()" [(value)]="other">
                 Other
               </mat-option>
           </mat-select>

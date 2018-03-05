@@ -9,6 +9,7 @@ import { switchMap } from 'rxjs/operators/switchMap';
 import { of as observableOf } from 'rxjs/observable/of';
 import { RoomModel } from '../models/RoomModel';
 import { AddRoomDialogComponent } from '../add-room-dialog/add-room-dialog.component';
+import { AddCategoryDialogComponent } from '../add-category-dialog/add-category-dialog.component';
 
 @Component({
   selector: 'app-reservations-table',
@@ -21,8 +22,6 @@ export class ReservationsTableComponent implements OnInit {
   dataSource;
   displayedColumns: any[]
   categories: {category_id:number, category_name: string}[];
-/*   dataSource= new MatTableDataSource();
- */@Input() month: {month: number, year: number};
 rooms: RoomModel[];
 openDialogRef: MatDialogRef<AddRoomDialogComponent>;
   constructor(private dataService: DataService, public dialog: MatDialog) { }

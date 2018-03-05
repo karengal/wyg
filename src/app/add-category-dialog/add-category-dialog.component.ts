@@ -2,6 +2,7 @@ import { Component, OnInit, Inject } from '@angular/core';
 import {MatDialog, MAT_DIALOG_DATA, MatDialogRef} from '@angular/material';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { RoomModel } from '../models/RoomModel';
+import { CategoryModel } from '../models/CategoryModel';
 
 @Component({
   selector: 'app-add-category-dialog',
@@ -15,18 +16,13 @@ export class AddCategoryDialogComponent implements OnInit {
 
   ngOnInit() {
     this.form = this.formBuilder.group({
-      category_id: this.generateId(),
-      name: '',
+      category_name: '',
       room_type: '',
     })
   }
-  private generateId() {
-    let n = Math.random() * 10000000;
-    return Math.floor(Math.random() * n);
-  };
 
   submit(form){
-    let room = new RoomModel(form.value);
+    let room = new CategoryModel(form.value);
     console.log(room);
     this.dialogRef.close(room);
   }
