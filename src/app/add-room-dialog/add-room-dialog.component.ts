@@ -33,4 +33,8 @@ export class AddRoomDialogComponent implements OnInit {
     console.log('clicked');
   }
 
+  addCategory(){
+    console.log('clicked');
+  }
+
 }

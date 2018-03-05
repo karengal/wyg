@@ -22,7 +22,7 @@ return this.http.post<any>('api/reservationsTable', room);
   };
 
   getCategories(): Observable<{category_id: number, category_name: string}[]>{
-    return this.http.get<{category_id: number, category_name: string}[]>('api/reservationsTable/companies');
+    return this.http.get<{category_id: number, category_name: string}[]>('api/reservationsTable/categories');
   };
 
 getToday(){
@@ -61,7 +61,7 @@ return {day: day, month: month, year: year};
        }else if (n == 5){
          obj = {num: this.numbersArray[i], day:'friday'}
        }else if (n == 6){
-         obj = {num: this.numbersArray[i], day:'saterday'}
+         obj = {num: this.numbersArray[i], day:'saturday'}
        }
        this.numbersObjArray.push(obj);
      }
