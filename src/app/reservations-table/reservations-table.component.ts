@@ -31,11 +31,11 @@ openDialogRef: MatDialogRef<AddRoomDialogComponent>;
     this.daysColGenerator();
     this.getRooms();
     console.log(this.rooms);
-    this.getCatagories();
+    this.getCategories();
     
  }
 
- getCatagories(){
+ getCategories(){
    this.dataService.getCategories().subscribe(
      data=>{
       console.log(data);
