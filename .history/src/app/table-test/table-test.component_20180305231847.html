@@ -8,7 +8,7 @@
       <ng-container matColumnDef="room">
         <mat-header-cell *matHeaderCellDef [ngClass]="'cellWidth'"> </mat-header-cell>
         <mat-cell [ngClass]="'cellWidth'" *matCellDef="let element">
-           <app-edit-menu [element]="element.room_id" (notify)="notify($event)"></app-edit-menu>
+           <app-edit-menu [element]="element" (notify)="handleEdit($event)"></app-edit-menu>
            <h1>{{element.name}} </h1>
            <h3>{{element.category}}</h3>
            <p>{{element.description}}</p>
@@ -17,7 +17,7 @@
   
       <!-- Name Column -->
       <div  *ngFor="let col of numbersArray">
-      <ng-container matColumnDef={{col.dayNum}}>
+      <ng-container matColumnDef={{col.num}}>
         <mat-header-cell [ngClass]="'celDatelWidth'" *matHeaderCellDef>  </mat-header-cell>
         <mat-cell  [ngClass]="'celDatelWidth'" *matCellDef="let element">
           <mat-cell [ngClass]="'celDatelWidth'" *ngFor="let bed of element.beds"><div>{{bed.bedNum}}<br></div></mat-cell>

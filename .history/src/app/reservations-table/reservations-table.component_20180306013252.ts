@@ -10,7 +10,6 @@ import { of as observableOf } from 'rxjs/observable/of';
 import { RoomModel } from '../models/RoomModel';
 import { AddRoomDialogComponent } from '../add-room-dialog/add-room-dialog.component';
 import { AddCategoryDialogComponent } from '../add-category-dialog/add-category-dialog.component';
-import { CalenderService } from '../calender.service';
 import { CustomEmitObj } from '../edit-menu/edit-menu.component';
 import { EditRoomComponent } from '../edit-room/edit-room.component';
 
@@ -21,6 +20,7 @@ import { EditRoomComponent } from '../edit-room/edit-room.component';
 })
 export class ReservationsTableComponent implements OnInit {
   numbersObjArray = new Array();
+  numbersArray = new Array();
   dataSource;
   displayedColumns: any[]
   categories: { category_id: number, category_name: string }[];
@@ -32,6 +32,7 @@ export class ReservationsTableComponent implements OnInit {
   ngOnInit() {
     this.daysColGenerator();
     this.getRooms();
+    console.log(this.rooms);
     this.getCategories();
 
   }
@@ -55,69 +56,28 @@ export class ReservationsTableComponent implements OnInit {
         result => {
           console.log(result);
           this.dataService.addRoom(result).subscribe(
-            data => this.getRooms()
+            data => console.log(data)
           ),
-            error => console.log('error', error)
+            error => console.log('error')
         }
-      ), error => console.log('error', error)
+      ), error => console.log('error')
   }
 
   getRooms() {
     this.dataService.getRooms().subscribe(
-      data=>{
-      this.dataSource = data;
+      data => {
+        console.log(data);
+        this.dataSource = data;
       }
     ), error => console.log(error)
   }
 
-  changeDays(){
-    let fullDate = this.numbersObjArray[this.numbersObjArray.length-1].db_date
-    console.log(fullDate);
-    this.calenderService.jumpTen(fullDate).subscribe(
-      result=>{
-        this.displayedColumns=["room"];
-        this.numbersObjArray = [];
-        console.log(result);
-        for (var i = 0; i < result.length; i++){
-          let dayNum = result[i].dayNum.toString();
-          this.displayedColumns.push(dayNum);
-        }
-        console.log(this.displayedColumns);
-        this.numbersObjArray = result; 
-      }    ),error=>console.log(error);
+  daysColGenerator() {
+    let generatorObj = this.dataService.daysColGenerator()
+    this.numbersArray = generatorObj.numbersArray;
+    this.numbersObjArray = generatorObj.numbersObjArray;
+    this.displayedColumns = generatorObj.displayedColumns;
   }
-
-  changeDaysBackwards(){
-    let fullDate = this.numbersObjArray[0].db_date
-    console.log(fullDate);
-    this.calenderService.jumpTenBack(fullDate).subscribe(
-      result=>{
-        this.displayedColumns=["room"];
-        this.numbersObjArray = [];
-        console.log(result);
-        for (var i = 0; i < result.length; i++){
-          let dayNum = result[i].dayNum.toString();
-          this.displayedColumns.push(dayNum);
-        }
-        console.log(this.displayedColumns);
-        this.numbersObjArray = result; 
-      }    ),error=>console.log(error);
-  }
-
-daysColGenerator(){
-  this.calenderService.daysColGenerator_fromDb().subscribe(
-    result=>{
-      console.log(result);
-      for (var i = 0; i < result.length; i++){
-        let dayNum = result[i].dayNum.toString();
-        this.displayedColumns.push(dayNum);
-      }
-      console.log(this.displayedColumns);
-      this.numbersObjArray = result; 
-    }
-  ), error=>console.log(error);
-}
-
 
   handleEdit(obj: CustomEmitObj) {
     console.log(obj);
@@ -125,7 +85,7 @@ daysColGenerator(){
     if (obj.mode === false){
       this.dataService.deleteRoom(obj.element).subscribe(
         data => {
-           this.getRooms();
+          this.getRooms();
         }, error => console.log(error));
     } else {
       // this.openEditDialogRef = this.dialog.open(EditRoomComponent,

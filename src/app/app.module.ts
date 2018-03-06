@@ -15,6 +15,8 @@ import { AddCategoryDialogComponent } from './add-category-dialog/add-category-d
 import { OverlayModule} from '@angular/cdk/overlay';
 import { HomeComponent } from './home/home.component';
 import { CalenderService } from './calender.service';
+import { EditMenuComponent } from './edit-menu/edit-menu.component';
+import { EditRoomComponent } from './edit-room/edit-room.component';
 
 @NgModule({
   declarations: [
@@ -25,6 +27,8 @@ import { CalenderService } from './calender.service';
     AddRoomDialogComponent,
     AddCategoryDialogComponent,
     HomeComponent
+    EditMenuComponent,
+    EditRoomComponent
   ],
   imports: [
     BrowserModule,

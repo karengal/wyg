@@ -16,7 +16,7 @@ export class TableTestComponent implements OnInit {
   @Input() columns;
   @Input() numbersArray;
   @Output() update:EventEmitter<CustomEmitObj> = new EventEmitter();
-  dataSourceArray = new Array();
+  dataSourceArray = new Array();;
   displayedColumns = new Array();
 
   
@@ -26,7 +26,6 @@ this.dataSourceArray.push(this.dataSource)
     this.displayedColumns = this.columns;
     console.log(this.dataSource);
     console.log(this.displayedColumns);
-    console.log(this.numbersArray);
 /*     this.dataSource = ELEMENT_DATA;
  */  }
 

@@ -5,9 +5,7 @@ var db_config = {
     user     : 'b0104e5aa74320',
     password : 'b6737162',
     database : 'heroku_30e0925129ce4c9'
-
 }
-
 var connection;
 
 function handleDisconnect(){
