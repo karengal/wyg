@@ -20,8 +20,6 @@
 
   .mat-cell {
       margin: 10px 0;
-/*       background-color: red
- */
   }
 
 
@@ -31,6 +29,7 @@
 
   .cellWidth{
     flex: 0 0 12%;
+    justify-content: flex-start;
   }
 
   .cellDateWidth {
@@ -48,4 +47,26 @@
 
   p {
     max-width: 80%;
+  }
+
+  .edit-icon-div {
+    display: flex;
+  }
+
+  h1{
+    width: 50%;
+  }
+
+  .hover:hover{
+    background-color: rgb(122, 116, 116);
+    color: white;
+  }
+
+
+  .my-class{
+    background-color: rgba(85, 80, 80, 0.664);
+    color: white;
+  }
+  .date-container{
+    z-index: 50;
   }

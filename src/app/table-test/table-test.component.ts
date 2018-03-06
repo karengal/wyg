@@ -18,8 +18,7 @@ export class TableTestComponent implements OnInit {
   @Output() update:EventEmitter<CustomEmitObj> = new EventEmitter();
   dataSourceArray = new Array();
   displayedColumns = new Array();
-
-  
+  isClassVisible = false;
 
   ngOnInit() {
 this.dataSourceArray.push(this.dataSource)
@@ -32,5 +31,9 @@ this.dataSourceArray.push(this.dataSource)
 
   notify(obj:CustomEmitObj){
     this.update.emit(obj);
+  }
+
+  clickedDate(){
+    this.isClassVisible = !this.isClassVisible;
   }
 }

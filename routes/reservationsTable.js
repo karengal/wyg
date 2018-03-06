@@ -16,11 +16,12 @@ function toRoomModel(rows) {
       for (var i = 0; i < rows.length; i++) {
             let bedsNumArray = rows[i].bedArray.split(',');
             let bedsAvailableArray = rows[i].availableArray.split(',');
+            let bedsIdArray = rows[i].bedIdArray.split(',');
             console.log(bedsNumArray);
             console.log(bedsAvailableArray);
             let room = {room_id: rows[i].room_id, name: rows[i].room_name, category: rows[i].category_name, description: rows[i].descText, beds:[] };
             for (var z = 0; z < bedsNumArray.length; z++){
-                  let obj = {bedNum: bedsNumArray[z], isAvailable: bedsAvailableArray[z]};
+                  let obj = {bed_id: bedsIdArray[z], bedNum: bedsNumArray[z], isAvailable: bedsAvailableArray[z]};
 
                   room.beds.push(obj);
             };
@@ -30,7 +31,7 @@ function toRoomModel(rows) {
 }
 
 router.get('/', (req, res)=>{
-      db.query('SELECT beds.room_id, rooms.room_name, roomsDescription.descText, categories.category_name, group_concat(bed_number) as bedArray, group_concat(isAvailable) as availableArray from beds inner join rooms on beds.room_id=rooms.room_id inner join roomsDescription on rooms.description_id=roomsDescription.description_id inner join categories on rooms.category_id=categories.category_id group by room_id', function(err, rows, fields){
+      db.query('SELECT beds.room_id, rooms.room_name, roomsDescription.descText, categories.category_name, group_concat(bed_number) as bedArray, group_concat(isAvailable) as availableArray, group_concat(bed_id) as bedIdArray from beds inner join rooms on beds.room_id=rooms.room_id inner join roomsDescription on rooms.description_id=roomsDescription.description_id inner join categories on rooms.category_id=categories.category_id group by room_id', function(err, rows, fields){
             if (!err) {
                   console.log(rows.length);
 
@@ -117,7 +118,8 @@ router.delete('/deleteroom/:roomId', (req, res) => {
             if(!err) res.send(rows);
             else console.log(err);
        })
- })
+
+      })
 
  router.get('/calendarback/:id',(req,res)=>{
       db.query('SELECT id, db_date, month, CAST(day as CHAR(10)) as dayNum, day_name, month_name FROM time_dimension WHERE db_date BETWEEN "' + req.params.id+ '"- INTERVAL 10 DAY AND "' + req.params.id+ '"', function(err, rows, fields){

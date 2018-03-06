@@ -4,7 +4,7 @@ export class RoomModel{
     category: string;
     description: string;
     beds:[
-        {bedNum:string, isAvailable: string}
+        {bed_id: number, bedNum:string, isAvailable: string}
     ]
     
     constructor(obj) {

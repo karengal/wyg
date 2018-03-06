@@ -1,10 +1,18 @@
 var mysql = require('mysql');
 
-var db_config = {
+/* var db_config = {
     host     : 'eu-cdbr-west-02.cleardb.net',
     user     : 'b0104e5aa74320',
     password : 'b6737162',
     database : 'heroku_30e0925129ce4c9'
+
+} */
+
+var db_config = {
+    host     : 'localhost',
+    user     : 'root',
+    password : 'A135246t',
+    database : 'wyg'
 
 }
 

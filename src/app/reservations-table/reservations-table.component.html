@@ -10,7 +10,7 @@
       
           <!-- Position Column -->
           <div class="roomNamesContainer">
-          <ng-container matColumnDef="room">
+          <ng-container  matColumnDef="room">
             <mat-header-cell *matHeaderCellDef [ngClass]="'cellWidth'"> Room</mat-header-cell>
           </ng-container>
         </div>
@@ -26,12 +26,11 @@
           <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
           <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
         </mat-table>
-</div>
-<div class="space"></div>
 
     <app-table-test *ngFor="let room of dataSource" [dataSource] = "room" [columns] = "displayedColumns" [numbersArray] = "numbersObjArray" (update)="handleEdit($event)"></app-table-test>
     <!-- <app-room  [room]=room [displayedColumns]="displayedColumns"></app-room> -->
 <div class="arrows">
     <a (click)="changeDays()"><i class="fa fa-angle-right"></i></a>
     <a (click)="changeDaysBackwards()"><i class="fa fa-angle-left"></i></a>
+    <button class="button" mat-button (click)="backToToday()">Today</button>
 </div>

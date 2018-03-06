@@ -3,6 +3,7 @@
   flex-direction: column;
   max-height: 500px;
   min-width: 300px;
+  background: linear-gradient(to top,#a2a2a2, white);;
 }
 
 .dates {
@@ -16,6 +17,10 @@
   .cellDateWidth {
     flex: 0 0 5%;
   } */
+.mat-header-cell{
+  color: white;
+}
+
 
   mat-cell {
     margin: 10px 0;
@@ -36,7 +41,6 @@ width: 100%;
   bottom:0px;
   right:auto;
   left:auto;
-  z-index: 1;
 }
 
 .arrows{
@@ -80,4 +84,14 @@ padding: 1% 3% 0 0;
 
 .fa-angle-right:hover, .fa-angle-left:hover {
   color: grey;
+}
+
+.mat-cell:hover{
+  background-color: brown;
+  color: white;
+}
+
+.mat-header:hover{
+  background-color: brown;
+  color: white;
 }
