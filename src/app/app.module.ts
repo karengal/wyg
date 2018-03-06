@@ -13,6 +13,8 @@ import { TableTestComponent } from './table-test/table-test.component';
 import { AddRoomDialogComponent } from './add-room-dialog/add-room-dialog.component';
 import { AddCategoryDialogComponent } from './add-category-dialog/add-category-dialog.component';
 import { OverlayModule} from '@angular/cdk/overlay';
+import { HomeComponent } from './home/home.component';
+import { CalenderService } from './calender.service';
 
 @NgModule({
   declarations: [
@@ -21,7 +23,8 @@ import { OverlayModule} from '@angular/cdk/overlay';
     RoomComponent,
     TableTestComponent,
     AddRoomDialogComponent,
-    AddCategoryDialogComponent
+    AddCategoryDialogComponent,
+    HomeComponent
   ],
   imports: [
     BrowserModule,
@@ -33,7 +36,7 @@ import { OverlayModule} from '@angular/cdk/overlay';
     CommonModule,
     OverlayModule
   ],
-  providers: [DataService],
+  providers: [DataService, CalenderService],
   bootstrap: [AppComponent],
   entryComponents: [AddRoomDialogComponent, AddCategoryDialogComponent]
 })
