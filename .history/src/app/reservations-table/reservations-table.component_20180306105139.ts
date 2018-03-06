@@ -1,20 +1,18 @@
-import { Component, OnInit, Input, ViewChild, ChangeDetectorRef } from '@angular/core';
-import { MatTableDataSource, MatDialogRef, MatDialog, MatSort } from '@angular/material';
+import { Component, OnInit, Input, ChangeDetectorRef, ChangeDetectionStrategy } from '@angular/core';
+import { MatTableDataSource, MatDialogRef, MatDialog } from '@angular/material';
 import { DataService } from '../data.service';
 import { catchError } from 'rxjs/operators/catchError';
 /* import { map } from 'rxjs/operators/map';
  */import { filter } from 'rxjs/operators';
- import { merge } from 'rxjs/observable/merge';
 import { startWith } from 'rxjs/operators/startWith';
 import { switchMap } from 'rxjs/operators/switchMap';
-import { map } from 'rxjs/operators/map';
 import { of as observableOf } from 'rxjs/observable/of';
 import { RoomModel } from '../models/RoomModel';
 import { AddRoomDialogComponent } from '../add-room-dialog/add-room-dialog.component';
 import { AddCategoryDialogComponent } from '../add-category-dialog/add-category-dialog.component';
 import { CustomEmitObj } from '../edit-menu/edit-menu.component';
 import { EditRoomComponent } from '../edit-room/edit-room.component';
-import { Observable } from 'rxjs/Observable';
+import { DataSource } from '@angular/cdk/table';
 
 @Component({
   selector: 'app-reservations-table',
@@ -24,18 +22,16 @@ import { Observable } from 'rxjs/Observable';
 export class ReservationsTableComponent implements OnInit {
   numbersObjArray = new Array();
   numbersArray = new Array();
-  dataSource = new MatTableDataSource();
+  dataSource;
   displayedColumns: any[]
   categories: { category_id: number, category_name: string }[];
   rooms: RoomModel[];
   openDialogRef: MatDialogRef<AddRoomDialogComponent>;
   openEditDialogRef: MatDialogRef<EditRoomComponent>;
-  isLoadingResults = true;
-  @ViewChild(MatSort) sort: MatSort;
-
-  constructor(private changeDetectorRefs: ChangeDetectorRef, private dataService: DataService, public dialog: MatDialog) { }
+  constructor(private ref: ChangeDetectorRef, private dataService: DataService, public dialog: MatDialog, private changeDetection: ChangeDetectionStrategy.OnPush) { }
 
   ngOnInit() {
+    this.ref.markForCheck();
     this.daysColGenerator();
     this.getRooms();
     this.getCategories();
@@ -61,7 +57,7 @@ export class ReservationsTableComponent implements OnInit {
         result => {
           console.log(result);
           this.dataService.addRoom(result).subscribe(
-            data => this.getRooms()
+            data => this.ref.detectChanges()
           ),
             error => console.log('error', error)
         }
@@ -69,26 +65,11 @@ export class ReservationsTableComponent implements OnInit {
   }
 
   getRooms() {
-    this.sort.sortChange.subscribe()
-    merge(this.sort.sortChange)
-      .pipe (
-        startWith({}),
-        switchMap(() => {
-          this.isLoadingResults = true;
-          return this.dataService.getRooms();
-        }),
-        map(data => {
-          this.isLoadingResults = false;
-          return data
-        }),
-        catchError(() => {
-          this.isLoadingResults = false;
-          return observableOf([]);
-        })
-      ).subscribe((data) =>{
-        this.dataSource.data = data;
-        this.changeDetectorRefs.detectChanges()
-      });
+    this.dataService.getRooms().subscribe(
+      data => {
+        this.dataSource = data;
+      }
+    ), error => console.log(error)
   }
 
   daysColGenerator() {
@@ -98,13 +79,20 @@ export class ReservationsTableComponent implements OnInit {
     this.displayedColumns = generatorObj.displayedColumns;
   }
 
+  refresh(){
+    this.dataService.getRooms().subscribe(
+      (data) => {
+        this.dataSource = new DataSource(data);
+      })
+  }
+
   handleEdit(obj: CustomEmitObj) {
     console.log(obj);
     console.log(obj.mode);
     if (obj.mode === false){
       this.dataService.deleteRoom(obj.element).subscribe(
         data => {
-           this.getRooms();
+           this.ref.detectChanges();
         }, error => console.log(error));
     } else {
       // this.openEditDialogRef = this.dialog.open(EditRoomComponent,

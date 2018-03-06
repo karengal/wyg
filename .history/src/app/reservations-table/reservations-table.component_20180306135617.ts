@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, ViewChild, ChangeDetectorRef } from '@angular/core';
+import { Component, OnInit, Input, ViewChild, ChangeDetectorRef, OnDestroy } from '@angular/core';
 import { MatTableDataSource, MatDialogRef, MatDialog, MatSort } from '@angular/material';
 import { DataService } from '../data.service';
 import { catchError } from 'rxjs/operators/catchError';
@@ -21,7 +21,8 @@ import { Observable } from 'rxjs/Observable';
   templateUrl: './reservations-table.component.html',
   styleUrls: ['./reservations-table.component.css']
 })
-export class ReservationsTableComponent implements OnInit {
+export class ReservationsTableComponent implements OnInit, OnDestroy {
+  init;
   numbersObjArray = new Array();
   numbersArray = new Array();
   dataSource = new MatTableDataSource();
@@ -37,9 +38,13 @@ export class ReservationsTableComponent implements OnInit {
 
   ngOnInit() {
     this.daysColGenerator();
-    this.getRooms();
+    this.init = this.getRooms();
     this.getCategories();
 
+  }
+
+  ngOnDestroy(){
+    this.init.dispose();
   }
 
   getCategories() {

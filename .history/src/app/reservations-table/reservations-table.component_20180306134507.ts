@@ -61,7 +61,7 @@ export class ReservationsTableComponent implements OnInit {
         result => {
           console.log(result);
           this.dataService.addRoom(result).subscribe(
-            data => this.getRooms()
+            data => /* this.getRooms() */ console.log('got here')
           ),
             error => console.log('error', error)
         }
@@ -104,7 +104,7 @@ export class ReservationsTableComponent implements OnInit {
     if (obj.mode === false){
       this.dataService.deleteRoom(obj.element).subscribe(
         data => {
-           this.getRooms();
+           /* this.getRooms(); */ console.log('got here')
         }, error => console.log(error));
     } else {
       // this.openEditDialogRef = this.dialog.open(EditRoomComponent,

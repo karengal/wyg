@@ -1,20 +1,17 @@
-import { Component, OnInit, Input, ViewChild, ChangeDetectorRef } from '@angular/core';
-import { MatTableDataSource, MatDialogRef, MatDialog, MatSort } from '@angular/material';
+import { Component, OnInit, Input } from '@angular/core';
+import { MatTableDataSource, MatDialogRef, MatDialog } from '@angular/material';
 import { DataService } from '../data.service';
 import { catchError } from 'rxjs/operators/catchError';
 /* import { map } from 'rxjs/operators/map';
  */import { filter } from 'rxjs/operators';
- import { merge } from 'rxjs/observable/merge';
 import { startWith } from 'rxjs/operators/startWith';
 import { switchMap } from 'rxjs/operators/switchMap';
-import { map } from 'rxjs/operators/map';
 import { of as observableOf } from 'rxjs/observable/of';
 import { RoomModel } from '../models/RoomModel';
 import { AddRoomDialogComponent } from '../add-room-dialog/add-room-dialog.component';
 import { AddCategoryDialogComponent } from '../add-category-dialog/add-category-dialog.component';
 import { CustomEmitObj } from '../edit-menu/edit-menu.component';
 import { EditRoomComponent } from '../edit-room/edit-room.component';
-import { Observable } from 'rxjs/Observable';
 
 @Component({
   selector: 'app-reservations-table',
@@ -24,16 +21,13 @@ import { Observable } from 'rxjs/Observable';
 export class ReservationsTableComponent implements OnInit {
   numbersObjArray = new Array();
   numbersArray = new Array();
-  dataSource = new MatTableDataSource();
+  dataSource;
   displayedColumns: any[]
   categories: { category_id: number, category_name: string }[];
   rooms: RoomModel[];
   openDialogRef: MatDialogRef<AddRoomDialogComponent>;
   openEditDialogRef: MatDialogRef<EditRoomComponent>;
-  isLoadingResults = true;
-  @ViewChild(MatSort) sort: MatSort;
-
-  constructor(private changeDetectorRefs: ChangeDetectorRef, private dataService: DataService, public dialog: MatDialog) { }
+  constructor(private dataService: DataService, public dialog: MatDialog) { }
 
   ngOnInit() {
     this.daysColGenerator();
@@ -69,26 +63,15 @@ export class ReservationsTableComponent implements OnInit {
   }
 
   getRooms() {
-    this.sort.sortChange.subscribe()
-    merge(this.sort.sortChange)
-      .pipe (
-        startWith({}),
-        switchMap(() => {
-          this.isLoadingResults = true;
-          return this.dataService.getRooms();
-        }),
-        map(data => {
-          this.isLoadingResults = false;
-          return data
-        }),
-        catchError(() => {
-          this.isLoadingResults = false;
-          return observableOf([]);
-        })
-      ).subscribe((data) =>{
-        this.dataSource.data = data;
-        this.changeDetectorRefs.detectChanges()
-      });
+    this.dataService.getRooms().subscribe(
+      data => {
+        console.log(data);
+        this.dataSource = data;
+        if (this.dataSource instanceof Observable ) {
+          
+        }
+      }
+    ), error => console.log(error)
   }
 
   daysColGenerator() {

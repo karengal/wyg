@@ -30,15 +30,33 @@ export class ReservationsTableComponent implements OnInit {
   rooms: RoomModel[];
   openDialogRef: MatDialogRef<AddRoomDialogComponent>;
   openEditDialogRef: MatDialogRef<EditRoomComponent>;
-  isLoadingResults = true;
   @ViewChild(MatSort) sort: MatSort;
 
   constructor(private changeDetectorRefs: ChangeDetectorRef, private dataService: DataService, public dialog: MatDialog) { }
 
   ngOnInit() {
     this.daysColGenerator();
-    this.getRooms();
-    this.getCategories();
+    this.sort.sortChange.subscribe()
+
+    merge(this.sort.sortChange)
+      .pipe (
+        startWith({}),
+        switchMap(() => {
+          return this.dataService.getRooms();
+        }),
+        map(data => {
+          return data
+        }),
+        catchError(() => {
+          return observableOf([]);
+        })
+      ).subscribe((data) =>{
+        this.dataSource.data = data;
+        this.changeDetectorRefs.detectChanges()
+      });
+      
+    // this.getRooms();
+    // this.getCategories();
 
   }
 
@@ -61,35 +79,20 @@ export class ReservationsTableComponent implements OnInit {
         result => {
           console.log(result);
           this.dataService.addRoom(result).subscribe(
-            data => this.getRooms()
+            data => /* this.getRooms() */ console.log('got here')
           ),
             error => console.log('error', error)
         }
       ), error => console.log('error', error)
   }
 
-  getRooms() {
-    this.sort.sortChange.subscribe()
-    merge(this.sort.sortChange)
-      .pipe (
-        startWith({}),
-        switchMap(() => {
-          this.isLoadingResults = true;
-          return this.dataService.getRooms();
-        }),
-        map(data => {
-          this.isLoadingResults = false;
-          return data
-        }),
-        catchError(() => {
-          this.isLoadingResults = false;
-          return observableOf([]);
-        })
-      ).subscribe((data) =>{
+/*   getRooms() {
+    this.dataService.getRooms().subscribe(
+      data => {
         this.dataSource.data = data;
-        this.changeDetectorRefs.detectChanges()
-      });
-  }
+      }
+    ), error => console.log(error)
+  } */
 
   daysColGenerator() {
     let generatorObj = this.dataService.daysColGenerator()
@@ -104,7 +107,7 @@ export class ReservationsTableComponent implements OnInit {
     if (obj.mode === false){
       this.dataService.deleteRoom(obj.element).subscribe(
         data => {
-           this.getRooms();
+           /* this.getRooms(); */ console.log('got here')
         }, error => console.log(error));
     } else {
       // this.openEditDialogRef = this.dialog.open(EditRoomComponent,
