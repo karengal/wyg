@@ -22,12 +22,12 @@ import { EditRoomComponent } from '../edit-room/edit-room.component';
 export class ReservationsTableComponent implements OnInit {
   numbersObjArray = new Array();
   dataSource;
-  displayedColumns: any[]
+  displayedColumns= ["room"];
   categories: { category_id: number, category_name: string }[];
   rooms: RoomModel[];
   openDialogRef: MatDialogRef<AddRoomDialogComponent>;
   openEditDialogRef: MatDialogRef<EditRoomComponent>;
-  constructor(private dataService: DataService, public dialog: MatDialog) { }
+  constructor(private dataService: DataService, private calenderService: CalenderService, public dialog: MatDialog) { }
 
   ngOnInit() {
     this.daysColGenerator();

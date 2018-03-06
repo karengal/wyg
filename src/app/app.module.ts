@@ -26,7 +26,7 @@ import { EditRoomComponent } from './edit-room/edit-room.component';
     TableTestComponent,
     AddRoomDialogComponent,
     AddCategoryDialogComponent,
-    HomeComponent
+    HomeComponent,
     EditMenuComponent,
     EditRoomComponent
   ],
