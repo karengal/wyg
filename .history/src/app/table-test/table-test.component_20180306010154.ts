@@ -16,7 +16,7 @@ export class TableTestComponent implements OnInit {
   @Input() columns;
   @Input() numbersArray;
   @Output() update:EventEmitter<CustomEmitObj> = new EventEmitter();
-  dataSourceArray = new Array();
+  dataSourceArray = new Array();;
   displayedColumns = new Array();
 
   

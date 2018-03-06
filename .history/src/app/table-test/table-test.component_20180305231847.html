@@ -8,7 +8,7 @@
       <ng-container matColumnDef="room">
         <mat-header-cell *matHeaderCellDef [ngClass]="'cellWidth'"> </mat-header-cell>
         <mat-cell [ngClass]="'cellWidth'" *matCellDef="let element">
-           <app-edit-menu [element]="element.room_id" (notify)="notify($event)"></app-edit-menu>
+           <app-edit-menu [element]="element" (notify)="handleEdit($event)"></app-edit-menu>
            <h1>{{element.name}} </h1>
            <h3>{{element.category}}</h3>
            <p>{{element.description}}</p>

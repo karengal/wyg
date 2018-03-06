@@ -32,6 +32,7 @@ export class ReservationsTableComponent implements OnInit {
   ngOnInit() {
     this.daysColGenerator();
     this.getRooms();
+    console.log(this.rooms);
     this.getCategories();
 
   }
@@ -55,11 +56,11 @@ export class ReservationsTableComponent implements OnInit {
         result => {
           console.log(result);
           this.dataService.addRoom(result).subscribe(
-            data => this.getRooms()
+            data => console.log(data)
           ),
-            error => console.log('error', error)
+            error => console.log('error')
         }
-      ), error => console.log('error', error)
+      ), error => console.log('error')
   }
 
   getRooms() {
@@ -82,10 +83,7 @@ export class ReservationsTableComponent implements OnInit {
     console.log(obj);
     console.log(obj.mode);
     if (obj.mode === false){
-      this.dataService.deleteRoom(obj.element).subscribe(
-        data => {
-           this.getRooms();
-        }, error => console.log(error));
+      this.dataService.deleteRoom(obj.element);
     } else {
       // this.openEditDialogRef = this.dialog.open(EditRoomComponent,
       //   { data: { room: obj.element } });

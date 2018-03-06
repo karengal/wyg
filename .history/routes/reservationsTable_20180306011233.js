@@ -77,11 +77,11 @@ router.post('/addroom', (req, res) => {
       })
 })
 
-router.delete('/deleteroom/:roomId', (req, res) => {
+router.delete('deleteroom/:roomId', (req, res) => {
       console.log(req.params.roomId)
-      db.query(`CALL deleteRoom(${req.params.roomId})`, function (err, result) {
+      db.query(`DELETE FROM rooms WHERE room_id = ${req.params.roomId}`, function (err, result){
             if (!err) {
-                  res.send(JSON.stringify(result));
+                  res.send('Deleted ' + result);
             }
             else {
                   console.log(err)
@@ -101,7 +101,5 @@ router.delete('/deleteroom/:roomId', (req, res) => {
 //             };
 //       })
 // })
-
-
 
 module.exports = router;
