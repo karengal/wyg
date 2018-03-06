@@ -91,7 +91,7 @@ router.delete('/deleteroom/:roomId', (req, res) => {
 })
 router.put('/editroom/:roomId', (req, res) => {
       console.log('this is req.body !!!! ' + JSON.stringify(req.body))
-      db.query(`CALL update_room(${req.params.roomId},'${req.body.description}', '${req.body.name}', ${req.body.category},${req.body.beds})`, function (err, result) {
+      db.query(`CALL update_room(${req.body.id},'${req.body.description}', '${req.body.name}', ${req.body.category},${req.body.beds})`, function (err, result) {
             if (!err) {
                   res.send(result);
             }

@@ -22,7 +22,6 @@ export class EditMenuComponent {
   constructor(private dataService: DataService) { }
 
   edit(){
-    console.log('emit')
     this.notify.emit({id: this.id, element: this.element, mode: true});
   }
 

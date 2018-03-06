@@ -24,9 +24,9 @@ export class EditRoomComponent {
     this.form = this.formBuilder.group({
       room_id: this.data.room.room_id,
       name: this.data.room.name,
-      category: '',
+      category: this.data.room.category_name,
       description: this.data.room.description,
-      beds: this.data.room.beds.length,
+      beds: this.data.room.beds.length + 1,
     })
   }
 
@@ -40,12 +40,13 @@ export class EditRoomComponent {
   }
 
   submit(form) {
-    console.log(form.value)
     let room = new RoomModel(form.value);
+    console.log('this is submit edit output --- ' + room)
     this.dialogRef.close(room);
   }
 
   openDialogCategories(){
+    console.log('clicked');
     this.openDialogRefCat = this.dialog.open(AddCategoryDialogComponent);
     this.openDialogRefCat
     .afterClosed()

@@ -42,10 +42,12 @@ export class EditRoomComponent {
   submit(form) {
     console.log(form.value)
     let room = new RoomModel(form.value);
+    console.log('this is submit edit output --- ' + room)
     this.dialogRef.close(room);
   }
 
   openDialogCategories(){
+    console.log('clicked');
     this.openDialogRefCat = this.dialog.open(AddCategoryDialogComponent);
     this.openDialogRefCat
     .afterClosed()

@@ -45,6 +45,7 @@ export class ReservationsTableComponent implements OnInit {
   getCategories() {
     this.dataService.getCategories().subscribe(
       data => {
+        console.log(data);
         this.categories = data;
       }
     ), error => console.log('error');
@@ -58,6 +59,7 @@ export class ReservationsTableComponent implements OnInit {
       .afterClosed()
       .subscribe(
         result => {
+          console.log(result);
           this.dataService.addRoom(result).subscribe(
             data => this.getRooms()
           ),
@@ -139,7 +141,6 @@ daysColGenerator(){
 
 
   handleEdit(obj: CustomEmitObj) {
-    console.log('handleEdit')
     if (obj.mode === false){
       this.dataService.deleteRoom(obj.id).subscribe(
         data => {

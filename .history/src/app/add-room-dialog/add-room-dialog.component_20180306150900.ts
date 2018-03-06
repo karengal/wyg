@@ -27,13 +27,23 @@ export class AddRoomDialogComponent implements OnInit {
     this.getCatagories();
     this.dataService.getAddedCategoryEmmiter().subscribe(
       ()=>{this.getCatagories()})
+    if (this.data.room){
       this.form = this.formBuilder.group({
-        room_id: '',
+        id: this.data.room.room_id,
+        name: this.data.room.name,
+        category: this.data.room.category_name,
+        description: this.data.room.description,
+        beds: this.data.room.beds,
+      })
+    } else {
+      this.form = this.formBuilder.group({
+        id: '',
         name: '',
         category: '',
         description: '',
         beds: '',
       })
+    }
   }
 
   getCatagories(){

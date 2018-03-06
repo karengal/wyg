@@ -46,6 +46,7 @@ export class EditRoomComponent {
   }
 
   openDialogCategories(){
+    console.log('clicked');
     this.openDialogRefCat = this.dialog.open(AddCategoryDialogComponent);
     this.openDialogRefCat
     .afterClosed()

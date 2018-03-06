@@ -139,7 +139,6 @@ daysColGenerator(){
 
 
   handleEdit(obj: CustomEmitObj) {
-    console.log('handleEdit')
     if (obj.mode === false){
       this.dataService.deleteRoom(obj.id).subscribe(
         data => {
