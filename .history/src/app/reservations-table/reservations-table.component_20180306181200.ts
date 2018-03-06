@@ -156,19 +156,4 @@ daysColGenerator(){
         ), error => console.log('error')
     }
   }
-
-  openDialogCategories(){
-    this.openCatDialogRef = this.dialog.open(AddCategoryDialogComponent);
-    this.openCatDialogRef
-    .afterClosed()
-    .subscribe(
-      result=> {
-        this.dataService.addCategory(result).subscribe(
-          data=>{
-            this.dataService.categoryWasAdded();
-          }
-        ), error=>console.log('error');
-      }
-    ), error=> console.log('error')
-  };
 }

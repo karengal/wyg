@@ -30,7 +30,6 @@ export class ReservationsTableComponent implements OnInit {
   rooms: RoomModel[];
   openDialogRef: MatDialogRef<AddRoomDialogComponent>;
   openEditDialogRef: MatDialogRef<EditRoomComponent>;
-  openCatDialogRef: MatDialogRef<AddCategoryDialogComponent>;
   isLoadingResults = true;
   @ViewChild(MatSort) sort: MatSort;
 
@@ -156,19 +155,4 @@ daysColGenerator(){
         ), error => console.log('error')
     }
   }
-
-  openDialogCategories(){
-    this.openCatDialogRef = this.dialog.open(AddCategoryDialogComponent);
-    this.openCatDialogRef
-    .afterClosed()
-    .subscribe(
-      result=> {
-        this.dataService.addCategory(result).subscribe(
-          data=>{
-            this.dataService.categoryWasAdded();
-          }
-        ), error=>console.log('error');
-      }
-    ), error=> console.log('error')
-  };
 }
