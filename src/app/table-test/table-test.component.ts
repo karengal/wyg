@@ -26,6 +26,7 @@ this.dataSourceArray.push(this.dataSource)
     this.displayedColumns = this.columns;
     console.log(this.dataSource);
     console.log(this.displayedColumns);
+    console.log(this.numbersArray);
 /*     this.dataSource = ELEMENT_DATA;
  */  }
 

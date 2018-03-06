@@ -1,18 +1,24 @@
-<button (click)="openDialog()">add room</button>
-        <mat-table #table [dataSource]="[]" class="example-container mat-elevation-z8">
-      
+
+<div class="container">
+  <div class="btn-container">
+    <button class="button" mat-button (click)="openDialogCat()">add category</button>
+    <button class="button" mat-button (click)="openDialog()">add room</button>
+  </div>    
+    <mat-table #table [dataSource]="rooms" class="example-container mat-elevation-z8">
           <!--- Note that these columns can be defined in any order.
                 The actual rendered columns are set as a property on the row definition" -->
       
           <!-- Position Column -->
+          <div class="roomNamesContainer">
           <ng-container matColumnDef="room">
             <mat-header-cell *matHeaderCellDef [ngClass]="'cellWidth'"> Room</mat-header-cell>
           </ng-container>
+        </div>
       
           <!-- Name Column -->
           <div  *ngFor="let col of numbersObjArray">
-          <ng-container matColumnDef={{col.num}}>
-            <mat-header-cell *matHeaderCellDef [ngClass]="'celDatelWidth'"> {{col.num}}<br> {{col.day}} </mat-header-cell>
+          <ng-container matColumnDef={{col.dayNum}}>
+            <mat-header-cell *matHeaderCellDef [ngClass]="'celDatelWidth'"> {{col.dayNum}}<br> {{col.day_name}} </mat-header-cell>
           </ng-container>
         </div>
     
@@ -20,6 +26,12 @@
           <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
           <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
         </mat-table>
+</div>
+<div class="space"></div>
 
     <app-table-test *ngFor="let room of dataSource" [dataSource] = "room" [columns] = "displayedColumns" [numbersArray] = "numbersObjArray" (update)="handleEdit($event)"></app-table-test>
     <!-- <app-room  [room]=room [displayedColumns]="displayedColumns"></app-room> -->
+<div class="arrows">
+    <a (click)="changeDays()"><i class="fa fa-angle-right"></i></a>
+    <a (click)="changeDaysBackwards()"><i class="fa fa-angle-left"></i></a>
+</div>

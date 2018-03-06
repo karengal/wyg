@@ -18,9 +18,10 @@ function toRoomModel(rows) {
             let bedsAvailableArray = rows[i].availableArray.split(',');
             console.log(bedsNumArray);
             console.log(bedsAvailableArray);
-            let room = { room_id: rows[i].room_id, name: rows[i].room_name, category: rows[i].category_name, description: rows[i].descText, beds: [] };
-            for (var z = 0; z < bedsNumArray.length; z++) {
-                  let obj = { bedNum: bedsNumArray[z], isAvailable: bedsAvailableArray[z] };
+            let room = {room_id: rows[i].room_id, name: rows[i].room_name, category: rows[i].category_name, description: rows[i].descText, beds:[] };
+            for (var z = 0; z < bedsNumArray.length; z++){
+                  let obj = {bedNum: bedsNumArray[z], isAvailable: bedsAvailableArray[z]};
+
                   room.beds.push(obj);
             };
             room.beds.sort(compare);
@@ -28,13 +29,12 @@ function toRoomModel(rows) {
       }
 }
 
-router.get('/', (req, res) => {
-      console.log('requested');
-      db.query('SELECT beds.room_id, rooms.room_name, roomsDescription.descText, categories.category_name, group_concat(bed_number) as bedArray, group_concat(isAvailable) as availableArray from beds inner join rooms on beds.room_id=rooms.room_id inner join roomsDescription on rooms.description_id=roomsDescription.description_id inner join categories on rooms.category_id=categories.category_id group by room_id', function (err, rows, fields) {
+router.get('/', (req, res)=>{
+      db.query('SELECT beds.room_id, rooms.room_name, roomsDescription.descText, categories.category_name, group_concat(bed_number) as bedArray, group_concat(isAvailable) as availableArray from beds inner join rooms on beds.room_id=rooms.room_id inner join roomsDescription on rooms.description_id=roomsDescription.description_id inner join categories on rooms.category_id=categories.category_id group by room_id', function(err, rows, fields){
             if (!err) {
-                  console.log(`This is rows ====== ${JSON.stringify(rows)}`);
+                  console.log(rows.length);
+
                   toRoomModel(rows);
-                  console.log(newArray);
                   res.send(newArray);
             }
             else console.log('error - ' + err);
@@ -46,12 +46,13 @@ router.post('/', (req, res) => {
       console.log(req.body);
 })
 
-router.get('/categories', (req, res) => {
-      db.query('SELECT categories.category_id, categories.category_name from categories', function (err, rows, fields) {
-            if (!err) res.send(rows);
-            else console.log('error');
-      })
-})
+ router.get('/categories', (req, res)=>{
+       db.query('SELECT categories.category_id, categories.category_name from categories', function(err, rows, fields){
+             if (!err) res.send(rows);
+             else console.log(err);
+       })
+ })
+
 
 router.post('/categories', (req, res) => {
       console.log(req.body);
@@ -104,4 +105,26 @@ router.delete('/deleteroom/:roomId', (req, res) => {
 
 
 
-module.exports = router;
+ router.get('/calendar', (req, res)=>{
+       db.query('SELECT id, db_date, month, CAST(day as CHAR(10)) as dayNum, day_name, month_name FROM time_dimension WHERE db_date BETWEEN curdate() AND DATE_ADD(NOW(), INTERVAL 9 DAY)', function(err, rows, fields){
+             if (!err) res.send(rows);
+             else console.log(err);
+       })
+ })
+
+ router.get('/calendar/:id',(req,res)=>{
+       db.query('SELECT id, db_date, month, CAST(day as CHAR(10)) as dayNum, day_name, month_name FROM time_dimension WHERE db_date BETWEEN DATE_ADD("' + req.params.id+ '", INTERVAL 1 DAY) AND DATE_ADD("'+req.params.id+'", INTERVAL 11 DAY)', function(err, rows, fields){
+            if(!err) res.send(rows);
+            else console.log(err);
+       })
+ })
+
+ router.get('/calendarback/:id',(req,res)=>{
+      db.query('SELECT id, db_date, month, CAST(day as CHAR(10)) as dayNum, day_name, month_name FROM time_dimension WHERE db_date BETWEEN "' + req.params.id+ '"- INTERVAL 10 DAY AND "' + req.params.id+ '"', function(err, rows, fields){
+           if(!err) res.send(rows);
+           else console.log(err);
+      })
+})
+
+ module.exports = router;
+
