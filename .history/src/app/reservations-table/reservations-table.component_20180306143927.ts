@@ -71,7 +71,6 @@ export class ReservationsTableComponent implements OnInit {
 
   getRooms() {
     this.sort.sortChange.subscribe()
-    merge(this.sort.sortChange)
       .pipe (
         startWith({}),
         switchMap(() => {

@@ -26,7 +26,7 @@ export class ReservationsTableComponent implements OnInit {
   numbersObjArray = new Array();
   numbersArray = new Array();
   dataSource = new MatTableDataSource();
-  displayedColumns = ['room'];
+  displayedColumns: ['room'];
   categories: { category_id: number, category_name: string }[];
   rooms: RoomModel[];
   openDialogRef: MatDialogRef<AddRoomDialogComponent>;

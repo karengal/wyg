@@ -13,6 +13,8 @@ import { TableTestComponent } from './table-test/table-test.component';
 import { AddRoomDialogComponent } from './add-room-dialog/add-room-dialog.component';
 import { AddCategoryDialogComponent } from './add-category-dialog/add-category-dialog.component';
 import { OverlayModule} from '@angular/cdk/overlay';
+import { HomeComponent } from './home/home.component';
+import { CalenderService } from './calender.service';
 import { EditMenuComponent } from './edit-menu/edit-menu.component';
 import { EditRoomComponent } from './edit-room/edit-room.component';
 
@@ -24,6 +26,7 @@ import { EditRoomComponent } from './edit-room/edit-room.component';
     TableTestComponent,
     AddRoomDialogComponent,
     AddCategoryDialogComponent,
+    HomeComponent,
     EditMenuComponent,
     EditRoomComponent
   ],
@@ -37,7 +40,7 @@ import { EditRoomComponent } from './edit-room/edit-room.component';
     CommonModule,
     OverlayModule
   ],
-  providers: [DataService],
+  providers: [DataService, CalenderService],
   bootstrap: [AppComponent],
   entryComponents: [AddRoomDialogComponent, AddCategoryDialogComponent]
 })

@@ -5,6 +5,7 @@ import { RoomModel } from '../models/RoomModel';
 import { CategoryModel } from '../models/CategoryModel';
 import { DataService } from '../data.service';
 import { AddCategoryDialogComponent } from '../add-category-dialog/add-category-dialog.component';
+import { Observable } from 'rxjs/Observable';
 
 @Component({
   selector: 'app-add-room-dialog',
@@ -14,20 +15,33 @@ import { AddCategoryDialogComponent } from '../add-category-dialog/add-category-
 export class AddRoomDialogComponent implements OnInit {
   form: FormGroup;
   openDialogRefCat: MatDialogRef<AddCategoryDialogComponent>;
+  categories: {category_id:number, category_name: string}[];
 
   constructor(private dataService: DataService,
               private formBuilder: FormBuilder,
               private dialogRef: MatDialogRef<AddRoomDialogComponent>,
-              @Inject(MAT_DIALOG_DATA) public data: any,
+              @Inject(MAT_DIALOG_DATA) public data: Observable<any>,
               public dialog: MatDialog) { }
 
   ngOnInit() {
+    this.getCatagories();
+    this.dataService.getAddedCategoryEmmiter().subscribe(
+      ()=>{this.getCatagories()})
     this.form = this.formBuilder.group({
       name: '',
       category: '',
       description: '',
       beds: '',
     })
+  }
+
+  getCatagories(){
+    this.dataService.getCategories().subscribe(
+      data=>{
+       console.log(data);
+       this.categories = data;
+      }
+    ),error=>console.log('error');
   }
 
   submit(form){
@@ -45,7 +59,10 @@ export class AddRoomDialogComponent implements OnInit {
       result=> {
         console.log(result);
         this.dataService.addCategory(result).subscribe(
-          data=>console.log(data)
+          data=>{
+            console.log(data);
+            this.dataService.categoryWasAdded();
+          }
         ), error=>console.log('error');
       }
     ), error=> console.log('error')
