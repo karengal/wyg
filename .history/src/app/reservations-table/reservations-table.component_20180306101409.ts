@@ -32,6 +32,7 @@ export class ReservationsTableComponent implements OnInit {
   ngOnInit() {
     this.daysColGenerator();
     this.getRooms();
+    console.log(this.rooms);
     this.getCategories();
 
   }
@@ -55,11 +56,11 @@ export class ReservationsTableComponent implements OnInit {
         result => {
           console.log(result);
           this.dataService.addRoom(result).subscribe(
-            data => this.getRooms()
+            data => this.getRooms();
           ),
-            error => console.log('error', error)
+            error => console.log('error')
         }
-      ), error => console.log('error', error)
+      ), error => console.log('error')
   }
 
   getRooms() {

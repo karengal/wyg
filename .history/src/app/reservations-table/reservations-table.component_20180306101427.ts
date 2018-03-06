@@ -32,6 +32,7 @@ export class ReservationsTableComponent implements OnInit {
   ngOnInit() {
     this.daysColGenerator();
     this.getRooms();
+    console.log(this.rooms);
     this.getCategories();
 
   }
