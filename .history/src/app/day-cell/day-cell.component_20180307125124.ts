@@ -23,7 +23,7 @@ export class DayCellComponent implements OnInit {
     this.isClassVisible = !this.isClassVisible;
     this.snackBar.openFromComponent(SnackBarComponent, {
       duration: 3000,
-      data: {message: `Bed number ${this.bed.bedNum} on ${this.date.month_name} ${this.date.dayNum}, ${this.year}, in room '${this.room}'`}
+      data: {message: `Bed number ${this.bed.bedNum} on ${this.date.month_name} ${this.date.dayNum} in room '${this.room}'`}
     });
   }
 

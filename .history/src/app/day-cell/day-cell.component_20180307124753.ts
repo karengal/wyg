@@ -12,18 +12,17 @@ export class DayCellComponent implements OnInit {
   @Input() bed;
   @Input() date;
   @Input() room;
-  year;
   constructor(public snackBar: MatSnackBar) { }
 
   ngOnInit(){
-    this.year = new Date(this.date.db_date).getFullYear()
+    console.log(this.date)
   }
 
   clickedDate(){
     this.isClassVisible = !this.isClassVisible;
     this.snackBar.openFromComponent(SnackBarComponent, {
       duration: 3000,
-      data: {message: `Bed number ${this.bed.bedNum} on ${this.date.month_name} ${this.date.dayNum}, ${this.year}, in room '${this.room}'`}
+      data: {message: `Bed number ${this.bed.bedNum} on ${this.date.month_name} ${this.date.dayNum} in room '${this.room}'`}
     });
   }
 
