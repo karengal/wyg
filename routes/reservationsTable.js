@@ -31,16 +31,37 @@ function toRoomModel(rows) {
 }
 
 router.get('/', (req, res)=>{
+<<<<<<< HEAD
       db.query('SELECT beds.room_id, rooms.room_name, roomsDescription.descText, categories.category_name, group_concat(bed_number) as bedArray, group_concat(isAvailable) as availableArray, group_concat(bed_id) as bedIdArray from beds inner join rooms on beds.room_id=rooms.room_id inner join roomsDescription on rooms.description_id=roomsDescription.description_id inner join categories on rooms.category_id=categories.category_id group by room_id', function(err, rows, fields){
+=======
+      if(req.query.name === undefined){
+            console.log('got request for all rooms');
+            db.query('SELECT beds.room_id, rooms.room_name, roomsDescription.descText, categories.category_name, group_concat(bed_number) as bedArray, group_concat(isAvailable) as availableArray from beds inner join rooms on beds.room_id=rooms.room_id inner join roomsDescription on rooms.description_id=roomsDescription.description_id inner join categories on rooms.category_id=categories.category_id group by room_id', function (err, rows, fields) {
+                  if (!err) {
+                        console.log(`This is rows ====== ${JSON.stringify(rows)}`);
+                        newArray = []
+                        toRoomModel(rows);
+                        console.log('-------------- new Array with all rooms' + newArray);
+                        res.send(newArray);
+                  }
+                  else console.log('error - ' + err);
+            })
+      }else{
+            console.log('got request for:' + req.body);
+            db.query('SELECT beds.room_id, rooms.room_name, roomsDescription.descText, categories.category_name, group_concat(bed_number) as bedArray, group_concat(isAvailable) as availableArray from beds inner join rooms on beds.room_id=rooms.room_id inner join roomsDescription on rooms.description_id=roomsDescription.description_id inner join categories on rooms.category_id=categories.category_id where rooms.room_name like "%' + req.query.name + '%"' + 'group by room_id', function(err, rows, fields){
+>>>>>>> f9b08bb26f7466c72329153dbbb9dd5843fae4bc
             if (!err) {
+                  console.log(`This is rows ====== ${JSON.stringify(rows)}`);
                   newArray = []
-                  toRoomModel(rows);
-                  res.send(newArray);
-            }
-            else console.log('error - ' + err);
-      })
+                  toRoomModel(rows);                 
+                  console.log('-------------- new Array before sending filter' + newArray);
+                  res.send(newArray);                  
+            }else console.log('error');
+            })
+            
+         }
+      });
 
-});
 
 router.post('/', (req, res) => {
       console.log(req.body);

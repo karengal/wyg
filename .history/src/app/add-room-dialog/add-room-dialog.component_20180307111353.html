@@ -1,0 +1,38 @@
+<form [formGroup]="form" (ngSubmit)="submit(form)">
+  <h1 mat-dialog-title>Add Room</h1>
+  <div mat-dialog-content>
+    <mat-form-field>
+      <input matInput formControlName="name" placeholder="Enter Room Name" #name="ngModel">
+    </mat-form-field>
+    <mat-form-field>
+      <textarea matInput formControlName="description" placeholder="Description goes here . . ."></textarea>
+    </mat-form-field>
+    <mat-form-field>
+      <input matInput type="number" formControlName="beds" #beds="ngModel" placeholder="Number of Beds" pattern="^(\d?[1-9]|[1-9]0)$">
+    </mat-form-field>
+    <mat-form-field>
+      <mat-select placeholder="Category" formControlName="category" #category="ngModel">
+        <mat-option *ngFor="let category of categories" [(value)]="category.category_id">
+          {{ category.category_name }}
+        </mat-option>
+        <mat-option (click)="openDialogCategories()" [(value)]="other">
+          Other
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+    <!--         [(ngModel)] = "data.categories.company_id"-->
+  </div>
+  <div mat-dialog-actions>
+    <div class="form-control-feedback" *ngIf="name.invalid && name.dirty">
+      Name is Required
+    </div>
+    <div class="form-control-feedback" *ngIf="beds.invalid && beds.dirty">
+      Number of Beds is Required. Only Numbers.
+    </div>
+    <div class="form-control-feedback" *ngIf="category.invalid && category.dirty">
+      Category is Required
+    </div>
+    <button mat-button type="submit">Add</button>
+    <button mat-button type="button" mat-dialog-close>Cancel</button>
+  </div>
+</form>
