@@ -28,6 +28,7 @@ export class ReservationsTableComponent implements OnInit {
   displayedColumns = ['room'];
   categories: { category_id: number, category_name: string }[];
   rooms: RoomModel[];
+  searchRoom: string;
   openDialogRef: MatDialogRef<AddRoomDialogComponent>;
   openEditDialogRef: MatDialogRef<EditRoomComponent>;
   openCatDialogRef: MatDialogRef<AddCategoryDialogComponent>;
@@ -42,6 +43,7 @@ export class ReservationsTableComponent implements OnInit {
     this.getCategories();
 
   }
+
 
   getCategories() {
     this.dataService.getCategories().subscribe(
@@ -89,6 +91,15 @@ export class ReservationsTableComponent implements OnInit {
         this.changeDetectorRefs.detectChanges()
       });
   }
+
+  onChange(){
+    this.dataService.searchRoom(this.searchRoom).subscribe((data) =>{
+      this.dataSource.data = data;
+      //this.changeDetectorRefs.detectChanges(),
+      error=>console.log(error)
+    });
+  }
+
 
   changeDays(){
     let fullDate = this.numbersObjArray[this.numbersObjArray.length-1].db_date

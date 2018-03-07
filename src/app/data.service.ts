@@ -21,9 +21,17 @@ addedCategory : EventEmitter<CategoryModel[]> = new EventEmitter();
     return this.http.get<RoomModel[]>('api/reservationsTable');
   }
 
+  //filter version of get
+  searchRoom(input){
+    console.log(input);
+    const params = {name: input};
+    return this.http.get<RoomModel[]>('api/reservationsTable', {params});
+  }
+
   addRoom(room): Observable<any>{
 return this.http.post<any>('api/reservationsTable/addroom', room);
   };
+
 
   getCategories(): Observable<{category_id: number, category_name: string}[]>{
     return this.http.get<{category_id: number, category_name: string}[]>('api/reservationsTable/categories');

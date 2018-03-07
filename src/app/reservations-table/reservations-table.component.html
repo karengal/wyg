@@ -13,7 +13,9 @@
     <!-- Position Column -->
     <div class="roomNamesContainer">
       <ng-container matColumnDef="room">
-        <mat-header-cell *matHeaderCellDef [ngClass]="'cellWidth'"> Room</mat-header-cell>
+        <mat-header-cell *matHeaderCellDef [ngClass]="'cellWidth'" > 
+          <input matInput placeholder="Room" [(ngModel)]="searchRoom" (input)="onChange()">
+        </mat-header-cell>
       </ng-container>
     </div>
 
