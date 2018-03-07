@@ -1,0 +1,23 @@
+.btn-container {
+    padding: 1% 0;
+    position: fixed;
+    top:0; 
+    text-align: center;
+    width: 80%;
+    height: 8%;
+    background-color: white;
+    z-index: 20;
+    background-color: rgb(0,84,112);
+  }
+  
+  .button {
+  margin: auto;
+  color: white;
+  }
+
+  .button:hover {
+    background-color: rgb(253,161,114);
+    opacity: 100%;
+
+  }
+  

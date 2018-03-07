@@ -12,19 +12,21 @@ function toRoomModel(rows) {
                   return 1;
             return 0;
       }
-
+      let colorCount = 1
       for (var i = 0; i < rows.length; i++) {
             let bedsNumArray = rows[i].bedArray.split(',');
             let bedsAvailableArray = rows[i].availableArray.split(',');
             let bedsIdArray = rows[i].bedIdArray.split(',');
             console.log(bedsNumArray);
             console.log(bedsAvailableArray);
-            let room = {room_id: rows[i].room_id, name: rows[i].room_name, category: rows[i].category_name, description: rows[i].descText, beds:[] };
+            var room = {room_id: rows[i].room_id, name: rows[i].room_name, room_color: 'room'+colorCount, category: rows[i].category_name, description: rows[i].descText, beds:[] };
+            if (colorCount===5) colorCount=0;
+            colorCount++;
             for (var z = 0; z < bedsNumArray.length; z++){
                   let obj = {bed_id: bedsIdArray[z], bedNum: bedsNumArray[z], isAvailable: bedsAvailableArray[z]};
-
                   room.beds.push(obj);
             };
+            console.log(room);
             room.beds.sort(compare);
             newArray.push(room);
       }
@@ -33,7 +35,7 @@ function toRoomModel(rows) {
 router.get('/', (req, res)=>{
       if(req.query.name === undefined){
             console.log('got request for all rooms');
-            db.query('SELECT beds.room_id, rooms.room_name, roomsDescription.descText, categories.category_name, group_concat(bed_number) as bedArray,group_concat(bed_id) as bedIdArray, group_concat(isAvailable) as availableArray from beds inner join rooms on beds.room_id=rooms.room_id inner join roomsDescription on rooms.description_id=roomsDescription.description_id inner join categories on rooms.category_id=categories.category_id group by room_id', function (err, rows, fields) {
+            db.query('SELECT beds.room_id, rooms.room_name, roomsdescription.descText, categories.category_name, group_concat(bed_number) as bedArray,group_concat(bed_id) as bedIdArray, group_concat(isAvailable) as availableArray from beds inner join rooms on beds.room_id=rooms.room_id inner join roomsdescription on rooms.description_id=roomsdescription.description_id inner join categories on rooms.category_id=categories.category_id group by room_id', function (err, rows, fields) {
                   if (!err) {
                         console.log(`This is rows ====== ${JSON.stringify(rows)}`);
                         newArray = []
@@ -45,7 +47,7 @@ router.get('/', (req, res)=>{
             })
       }else{
             console.log('got request for:' + req.body);
-            db.query('SELECT beds.room_id, rooms.room_name, roomsDescription.descText, categories.category_name, group_concat(bed_number) as bedArray,group_concat(bed_id) as bedIdArray, group_concat(isAvailable) as availableArray from beds inner join rooms on beds.room_id=rooms.room_id inner join roomsDescription on rooms.description_id=roomsDescription.description_id inner join categories on rooms.category_id=categories.category_id where rooms.room_name like "%' + req.query.name + '%"' + 'group by room_id', function(err, rows, fields){
+            db.query('SELECT beds.room_id, rooms.room_name, roomsdescription.descText, categories.category_name, group_concat(bed_number) as bedArray,group_concat(bed_id) as bedIdArray, group_concat(isAvailable) as availableArray from beds inner join rooms on beds.room_id=rooms.room_id inner join roomsdescription on rooms.description_id=roomsdescription.description_id inner join categories on rooms.category_id=categories.category_id where rooms.room_name like "%' + req.query.name + '%"' + 'group by room_id', function(err, rows, fields){
             if (!err) {
                   console.log(`This is rows ====== ${JSON.stringify(rows)}`);
                   newArray = []

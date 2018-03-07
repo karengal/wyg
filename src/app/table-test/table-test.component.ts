@@ -16,6 +16,7 @@ export class TableTestComponent implements OnInit {
   @Input() columns;
   @Input() numbersArray;
   @Output() update:EventEmitter<CustomEmitObj> = new EventEmitter();
+  @Output() edDel:EventEmitter<any> = new EventEmitter();
   dataSourceArray = new Array();
   displayedColumns = new Array();
   isClassVisible = false;
@@ -23,9 +24,14 @@ export class TableTestComponent implements OnInit {
   ngOnInit() {
     this.dataSourceArray.push(this.dataSource)
     this.displayedColumns = this.columns;
+    console.log(this.dataSourceArray);
   }
 
   notify(obj:CustomEmitObj){
     this.update.emit(obj);
+  }
+
+  editDelete(obj){
+    this.edDel.emit(obj);
   }
 }

@@ -60,3 +60,11 @@ html, body, app-root, .app-frame {
 .force-overflow {
     min-height: 450px;
 }
+
+.mat-elevation-z8{
+    z-index: 1;
+}
+
+.main-theme{
+    background-color: rgb(0,84,112)
+}

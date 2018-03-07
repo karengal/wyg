@@ -3,12 +3,23 @@
   flex-direction: column;
   max-height: 500px;
   min-width: 300px;
-  background: linear-gradient(to top,#a2a2a2, white);;
 }
 
 .dates {
   text-align: center;
 }
+
+.mat-header-row {
+  max-height: 500px;
+width: 80%;
+  top: 100px;
+  position: fixed;
+  z-index: 10;
+  background-color: rgb(253,161,114);
+/*   background: linear-gradient(to top,rgb(253,161,114), rgb(217,128,122));
+ */  border:none;
+}
+
 
 .cellWidth{
     flex: 0 0 12%;
@@ -57,16 +68,16 @@ width: 100%;
 
 .arrows{
   background-color: white;
-  width: 100%;
-  height: 10%;
+  width: 80%;
+    height: 10%;
   position: fixed;
   top:auto;
   bottom:0px;
   right:auto;
   left:auto; 
   z-index: 1;
-  box-shadow: 0 -5px 10px -5px #333;
-direction: rtl;  
+  background-color: rgb(0,84,112);
+  direction: rtl;  
 
 }
 
@@ -81,29 +92,46 @@ direction: rtl;
 
 .button {
 margin: auto;
+color: white;
+}
+
+.button:hover{
+  background-color: rgb(253,161,114);
 }
 
 .space {
   width: 100%;
-  height: 150px;
+  height: 7.5vw;
+}
+
+.spaceup{
+  width: 100%;
+  height: 8vw;
 }
 
 .fa-angle-right, .fa-angle-left {
   font-size: 30px;
   font-weight: 900;
 padding: 1% 3% 0 0;
+color: white;
 }
 
 .fa-angle-right:hover, .fa-angle-left:hover {
   color: grey;
+  color:rgb(253,161,114)
 }
 
-.mat-cell:hover{
-  background-color: brown;
-  color: white;
+.month-wrap{
+text-align: center;
+width:80%;
+position: fixed;
+top:60px;
+z-index: 40;
 }
 
-.mat-header:hover{
-  background-color: brown;
+.month-name{
+  margin: auto;
+  text-align: center;
   color: white;
-}
+  font-weight: 900;
+ }

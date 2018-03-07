@@ -19,14 +19,19 @@ export class EditMenuComponent {
   @Input() element:RoomModel;
   @Input() id:number;
   @Output() notify:EventEmitter<CustomEmitObj> = new EventEmitter();
+  @Output() editDelete: EventEmitter<any> = new EventEmitter();
   constructor(private dataService: DataService) { }
 
   edit(){
-    this.notify.emit({id: this.id, element: this.element, mode: true});
+    this.editDelete.emit({id: this.id, element: this.element, mode: true});
   }
 
   delete(){
-    this.notify.emit({id: this.id, element: this.element, mode: false});
+    this.editDelete.emit({id: this.id, element: this.element, mode: false});
+  }
+
+  openManu(obj:CustomEmitObj){
+    this.notify.emit(obj)
   }
 }
 

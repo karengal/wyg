@@ -18,6 +18,8 @@ import { CalenderService } from './calender.service';
 import { EditMenuComponent } from './edit-menu/edit-menu.component';
 import { EditRoomComponent } from './edit-room/edit-room.component';
 import { DayCellComponent } from './day-cell/day-cell.component';
+import { RoomNameComponent } from './room-name/room-name.component';
+import { EditorBtnsComponent } from './editor-btns/editor-btns.component';
 
 @NgModule({
   declarations: [
@@ -30,7 +32,9 @@ import { DayCellComponent } from './day-cell/day-cell.component';
     HomeComponent,
     EditMenuComponent,
     EditRoomComponent,
-    DayCellComponent
+    DayCellComponent,
+    RoomNameComponent,
+    EditorBtnsComponent
   ],
   imports: [
     BrowserModule,

@@ -7,14 +7,21 @@ var mysql = require('mysql');
     database : 'heroku_30e0925129ce4c9'
 
 } */
-
 var db_config = {
+    host     : 'sql11.freemysqlhosting.net',
+    user     : 'sql11225120',
+    password : 'gRRd3hgNjM',
+    database : 'sql11225120'
+
+}
+
+/* var db_config = {
     host     : 'eu-cdbr-west-02.cleardb.net',
     user     : 'b0104e5aa74320',
     password : 'b6737162',
     database : 'heroku_30e0925129ce4c9'
 
-}
+} */
 
 var connection;
 
