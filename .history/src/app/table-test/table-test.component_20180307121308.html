@@ -24,7 +24,7 @@
         <mat-header-cell [ngClass]="'celDatelWidth'" *matHeaderCellDef>  </mat-header-cell>
         <mat-cell  [ngClass]="'celDatelWidth'" *matCellDef="let element">
           <mat-cell [ngClass]="'celDatelWidth'" *ngFor="let bed of element.beds">
-            <app-day-cell [bed]="bed" [date]="col" [room]="element.name"></app-day-cell>
+            <app-day-cell [bed]="bed" [date]="col"></app-day-cell>
           </mat-cell>
         </mat-cell>
       </ng-container>
