@@ -1,10 +1,9 @@
+<app-editor-btns (addCat)="openDialogCategories()" (addRoom)="openDialog()"></app-editor-btns>
+<div class="month-wrap"><h1 class="month-name">{{currentMonth}}</h1></div>
+<div class="spaceup"></div>
 <div class="container">
   <div class="example-loading-shade" *ngIf="isLoadingResults">
     <mat-spinner *ngIf="isLoadingResults"></mat-spinner>
-  </div>
-  <div class="btn-container">
-    <button class="button" mat-button (click)="openDialogCategories()">add category</button>
-    <button class="button" mat-button (click)="openDialog()">add room</button>
   </div>
   <mat-table #table [dataSource]="rooms" class="example-container mat-elevation-z8" matSort matSortActive="room" matSortDisableClear matSortDirection="asc">
     <!--- Note that these columns can be defined in any order.
@@ -32,11 +31,10 @@
     <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
   </mat-table>
 </div>
-<div class="space"></div>
-
-<app-table-test *ngFor="let room of dataSource.data" (update)="handleEdit($event)" [dataSource]="room" [columns]="displayedColumns"
+<app-table-test *ngFor="let room of dataSource.data" (update)="handleEdit($event)" (edDel)="handleEdit($event)" [dataSource]="room" [columns]="displayedColumns"
   [numbersArray]="numbersObjArray"></app-table-test>
 <!-- <app-room  [room]=room [displayedColumns]="displayedColumns"></app-room> -->
+<div class="space"></div>
 <div class="arrows">
     <a (click)="changeDays()"><i class="fa fa-angle-right"></i></a>
     <a (click)="changeDaysBackwards()"><i class="fa fa-angle-left"></i></a>

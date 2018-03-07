@@ -33,6 +33,7 @@ export class ReservationsTableComponent implements OnInit {
   openEditDialogRef: MatDialogRef<EditRoomComponent>;
   openCatDialogRef: MatDialogRef<AddCategoryDialogComponent>;
   isLoadingResults = true;
+  currentMonth = "";
   @ViewChild(MatSort) sort: MatSort;
 
   constructor(private calenderService:CalenderService, private changeDetectorRefs: ChangeDetectorRef, private dataService: DataService, public dialog: MatDialog) { }
@@ -41,6 +42,7 @@ export class ReservationsTableComponent implements OnInit {
     this.daysColGenerator();
     this.getRooms();
     this.getCategories();
+
 
   }
 
@@ -113,6 +115,7 @@ export class ReservationsTableComponent implements OnInit {
         }
         console.log(this.displayedColumns);
         this.numbersObjArray = result; 
+        this.currentMonth = this.numbersObjArray[0].month_name; 
       }    ),error=>console.log(error);
   }
 
@@ -128,6 +131,7 @@ export class ReservationsTableComponent implements OnInit {
         }
         console.log(this.displayedColumns);
         this.numbersObjArray = result; 
+        this.currentMonth = this.numbersObjArray[0].month_name; 
       }    ),error=>console.log(error);
   }
 
@@ -141,7 +145,10 @@ daysColGenerator(){
         let dayNum = result[i].dayNum.toString();
         this.displayedColumns.push(dayNum);
       }
-      this.numbersObjArray = result; 
+      this.numbersObjArray = result;
+      this.currentMonth = this.numbersObjArray[0].month_name; 
+      console.log(this.numbersObjArray);
+
     }
   ), error=>console.log(error);
 }

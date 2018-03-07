@@ -3,9 +3,13 @@
     flex-direction: column;
     max-height: 500px;
     min-width: 300px;
+    z-index: 0;
  
   }
-  
+  .bg-room {
+    background-color: aquamarine
+  }
+
   .dates {
     text-align: center;
   }
@@ -25,16 +29,6 @@
 
   mat-cell mat-cell{
     line-height: 25px;
-  }
-
-  .cellWidth{
-    flex: 0 0 12%;
-    justify-content: flex-start;
-  }
-
-  .cellDateWidth {
-    /* flex: 0 0 100px; */
-    background-color: yellow !important;
   }
 
   ng-container {
@@ -69,4 +63,29 @@
   }
   .date-container{
     z-index: 50;
+  }
+  mat-table{
+    box-shadow: none;
+    text-align: left;
+  }
+
+  .room1{
+    background-color: rgb(104, 196, 197);
+  }
+
+  .room2{
+    background-color: rgb(76, 145, 146);
+  }
+
+  .room3{
+    background-color: rgb(125, 176, 177);
+
+  }
+
+  .room4{
+    background-color: rgb(164, 225, 226);
+  }
+
+  .room5{
+    background-color: rgb(68, 142, 143);
   }

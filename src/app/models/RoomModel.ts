@@ -1,5 +1,6 @@
 export class RoomModel{
     room_id: number;
+    room_color: string;
     name: string;
     category: string;
     description: string;

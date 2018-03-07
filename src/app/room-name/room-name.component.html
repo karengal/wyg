@@ -1,0 +1,8 @@
+  <div>
+    <div class="edit-icon-div">
+      <h1>{{element.name}} </h1>
+      <app-edit-menu [element]="element" [id]="element.room_id" (notify)="notify($event)" (editDelete)="handleEdit($event)"></app-edit-menu>
+    </div>  
+    <h3>{{element.category}}</h3>
+    <p>{{element.description}}</p>
+</div>

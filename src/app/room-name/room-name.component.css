@@ -1,0 +1,25 @@
+.cellWidth{
+    flex: 0 0 15%;
+    justify-content: flex-start;
+    min-height: 100px;
+  }
+
+  .edit-icon-div{
+display: flex;
+}
+
+  h1 {
+    width: 70%;
+    color: white;
+    font-weight: 900;
+    line-height: 20px;
+    word-wrap: normal;
+    margin: 0;
+  }
+
+  h3{
+    margin: 0;
+    line-height: 16px;
+    font-weight: 900;
+
+  }
