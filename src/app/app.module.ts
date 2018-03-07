@@ -17,6 +17,7 @@ import { HomeComponent } from './home/home.component';
 import { CalenderService } from './calender.service';
 import { EditMenuComponent } from './edit-menu/edit-menu.component';
 import { EditRoomComponent } from './edit-room/edit-room.component';
+import { DayCellComponent } from './day-cell/day-cell.component';
 
 @NgModule({
   declarations: [
@@ -28,7 +29,8 @@ import { EditRoomComponent } from './edit-room/edit-room.component';
     AddCategoryDialogComponent,
     HomeComponent,
     EditMenuComponent,
-    EditRoomComponent
+    EditRoomComponent,
+    DayCellComponent
   ],
   imports: [
     BrowserModule,
@@ -42,6 +44,6 @@ import { EditRoomComponent } from './edit-room/edit-room.component';
   ],
   providers: [DataService, CalenderService],
   bootstrap: [AppComponent],
-  entryComponents: [AddRoomDialogComponent, AddCategoryDialogComponent]
+  entryComponents: [AddRoomDialogComponent, AddCategoryDialogComponent, EditRoomComponent]
 })
 export class AppModule { }

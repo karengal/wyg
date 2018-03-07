@@ -1,0 +1,28 @@
+<form [formGroup]="form" (ngSubmit)="submit(form)">
+    <h1 mat-dialog-title>Edit Room</h1>
+    <div mat-dialog-content>
+      <mat-form-field>
+        <input matInput formControlName="name">
+      </mat-form-field>
+      <mat-form-field>
+        <textarea matInput formControlName="description"></textarea>
+      </mat-form-field>
+      <mat-form-field>
+        <input matInput type="number" formControlName="beds" pattern="^(\d?[1-9]|[1-9]0)$">
+      </mat-form-field>
+      <mat-form-field>
+          <mat-select placeholder="room.category" formControlName="category">
+            <mat-option *ngFor="let category of data.categories" [(value)]="category.category_id">
+              {{ category.category_name }}
+            </mat-option>
+            <mat-option (click)="openDialogCategories()" [(value)]="other">
+                Other
+              </mat-option>
+          </mat-select>
+        </mat-form-field>
+    </div>
+    <div mat-dialog-actions>
+      <button mat-button type="submit">Add</button>
+      <button mat-button type="button" mat-dialog-close>Cancel</button>
+    </div>
+</form>

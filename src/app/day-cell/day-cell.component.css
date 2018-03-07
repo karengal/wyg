@@ -1,0 +1,9 @@
+.hover:hover{
+    background-color: rgb(122, 116, 116);
+    color: white;
+  }
+
+  .my-class{
+    background-color: rgba(85, 80, 80, 0.664);
+    color: white;
+  }

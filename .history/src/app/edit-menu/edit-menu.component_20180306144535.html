@@ -1,0 +1,13 @@
+<button mat-icon-button [matMenuTriggerFor]="menu" class="butZ">
+    <mat-icon>more_vert</mat-icon>
+  </button>
+  <mat-menu #menu="matMenu">
+    <button mat-menu-item (click)="edit()">
+      <mat-icon>mode_edit</mat-icon>
+      <span>Edit</span>
+    </button>
+    <button mat-menu-item (click)="delete()">
+      <mat-icon>delete_forever</mat-icon>
+      <span>Delete Room</span>
+    </button>
+  </mat-menu>

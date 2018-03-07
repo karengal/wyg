@@ -2,7 +2,7 @@ var express = require('express');
 var router = express.Router();
 var db = require('./db.js');
 
-let newArray = [];
+let newArray;
 
 function toRoomModel(rows) {
       function compare(a, b) {
@@ -33,8 +33,7 @@ function toRoomModel(rows) {
 router.get('/', (req, res)=>{
       db.query('SELECT beds.room_id, rooms.room_name, roomsDescription.descText, categories.category_name, group_concat(bed_number) as bedArray, group_concat(isAvailable) as availableArray, group_concat(bed_id) as bedIdArray from beds inner join rooms on beds.room_id=rooms.room_id inner join roomsDescription on rooms.description_id=roomsDescription.description_id inner join categories on rooms.category_id=categories.category_id group by room_id', function(err, rows, fields){
             if (!err) {
-                  console.log(rows.length);
-
+                  newArray = []
                   toRoomModel(rows);
                   res.send(newArray);
             }
@@ -91,18 +90,18 @@ router.delete('/deleteroom/:roomId', (req, res) => {
             }
       })
 })
-// router.put('/editroom/:roomId', (req, res) => {
-//       console.log('this is req.body !!!! ' + JSON.stringify(req.body))
-//       db.query(`CALL add_room('${req.body.description}', '${req.body.name}', ${req.body.category},${req.body.beds})`, function (err, result) {
-//             if (!err) {
-//                   res.send(result);
-//             }
-//             else {
-//                   console.log(err)
-//                   res.send(err)
-//             };
-//       })
-// })
+router.put('/editroom/:roomId', (req, res) => {
+      console.log('this is req.body !!!! ' + JSON.stringify(req.body))
+      db.query(`CALL update_room(${req.params.roomId},'${req.body.description}', '${req.body.name}', ${req.body.category},${req.body.beds})`, function (err, result) {
+            if (!err) {
+                  res.send(result);
+            }
+            else {
+                  console.log(err)
+                  res.send(err)
+            };
+      })
+})
 
 
 

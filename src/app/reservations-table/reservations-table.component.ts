@@ -1,11 +1,12 @@
-import { Component, OnInit, Input } from '@angular/core';
-import { MatTableDataSource, MatDialogRef, MatDialog } from '@angular/material';
+import { Component, OnInit, Input, ViewChild, ChangeDetectorRef } from '@angular/core';
+import { MatTableDataSource, MatDialogRef, MatDialog, MatSort } from '@angular/material';
 import { DataService } from '../data.service';
 import { catchError } from 'rxjs/operators/catchError';
-/* import { map } from 'rxjs/operators/map';
- */import { filter } from 'rxjs/operators';
+import { filter } from 'rxjs/operators';
+ import { merge } from 'rxjs/observable/merge';
 import { startWith } from 'rxjs/operators/startWith';
 import { switchMap } from 'rxjs/operators/switchMap';
+import { map } from 'rxjs/operators/map';
 import { of as observableOf } from 'rxjs/observable/of';
 import { RoomModel } from '../models/RoomModel';
 import { AddRoomDialogComponent } from '../add-room-dialog/add-room-dialog.component';
@@ -13,6 +14,7 @@ import { AddCategoryDialogComponent } from '../add-category-dialog/add-category-
 import { CalenderService } from '../calender.service';
 import { CustomEmitObj } from '../edit-menu/edit-menu.component';
 import { EditRoomComponent } from '../edit-room/edit-room.component';
+import { Observable } from 'rxjs/Observable';
 
 @Component({
   selector: 'app-reservations-table',
@@ -21,13 +23,18 @@ import { EditRoomComponent } from '../edit-room/edit-room.component';
 })
 export class ReservationsTableComponent implements OnInit {
   numbersObjArray = new Array();
-  dataSource;
-  displayedColumns= ["room"];
+  numbersArray = new Array();
+  dataSource = new MatTableDataSource();
+  displayedColumns = ['room'];
   categories: { category_id: number, category_name: string }[];
   rooms: RoomModel[];
   openDialogRef: MatDialogRef<AddRoomDialogComponent>;
   openEditDialogRef: MatDialogRef<EditRoomComponent>;
-  constructor(private dataService: DataService, private calenderService: CalenderService, public dialog: MatDialog) { }
+  openCatDialogRef: MatDialogRef<AddCategoryDialogComponent>;
+  isLoadingResults = true;
+  @ViewChild(MatSort) sort: MatSort;
+
+  constructor(private calenderService:CalenderService, private changeDetectorRefs: ChangeDetectorRef, private dataService: DataService, public dialog: MatDialog) { }
 
   ngOnInit() {
     this.daysColGenerator();
@@ -39,7 +46,6 @@ export class ReservationsTableComponent implements OnInit {
   getCategories() {
     this.dataService.getCategories().subscribe(
       data => {
-        console.log(data);
         this.categories = data;
       }
     ), error => console.log('error');
@@ -53,7 +59,6 @@ export class ReservationsTableComponent implements OnInit {
       .afterClosed()
       .subscribe(
         result => {
-          console.log(result);
           this.dataService.addRoom(result).subscribe(
             data => this.getRooms()
           ),
@@ -63,21 +68,34 @@ export class ReservationsTableComponent implements OnInit {
   }
 
   getRooms() {
-    this.dataService.getRooms().subscribe(
-      data=>{
-      this.dataSource = data;
-      }
-    ), error => console.log(error)
+    this.sort.sortChange.subscribe()
+    merge(this.sort.sortChange)
+      .pipe (
+        startWith({}),
+        switchMap(() => {
+          this.isLoadingResults = true;
+          return this.dataService.getRooms();
+        }),
+        map(data => {
+          this.isLoadingResults = false;
+          return data
+        }),
+        catchError(() => {
+          this.isLoadingResults = false;
+          return observableOf([]);
+        })
+      ).subscribe((data) =>{
+        this.dataSource.data = data;
+        this.changeDetectorRefs.detectChanges()
+      });
   }
 
   changeDays(){
     let fullDate = this.numbersObjArray[this.numbersObjArray.length-1].db_date
-    console.log(fullDate);
     this.calenderService.jumpTen(fullDate).subscribe(
       result=>{
         this.displayedColumns=["room"];
         this.numbersObjArray = [];
-        console.log(result);
         for (var i = 0; i < result.length; i++){
           let dayNum = result[i].dayNum.toString();
           this.displayedColumns.push(dayNum);
@@ -89,12 +107,10 @@ export class ReservationsTableComponent implements OnInit {
 
   changeDaysBackwards(){
     let fullDate = this.numbersObjArray[0].db_date
-    console.log(fullDate);
     this.calenderService.jumpTenBack(fullDate).subscribe(
       result=>{
         this.displayedColumns=["room"];
         this.numbersObjArray = [];
-        console.log(result);
         for (var i = 0; i < result.length; i++){
           let dayNum = result[i].dayNum.toString();
           this.displayedColumns.push(dayNum);
@@ -105,14 +121,15 @@ export class ReservationsTableComponent implements OnInit {
   }
 
 daysColGenerator(){
+  this.displayedColumns = ["room"];
+  this.numbersArray = [];
+  this.numbersObjArray = [];
   this.calenderService.daysColGenerator_fromDb().subscribe(
     result=>{
-      console.log(result);
       for (var i = 0; i < result.length; i++){
         let dayNum = result[i].dayNum.toString();
         this.displayedColumns.push(dayNum);
       }
-      console.log(this.displayedColumns);
       this.numbersObjArray = result; 
     }
   ), error=>console.log(error);
@@ -120,28 +137,43 @@ daysColGenerator(){
 
 
   handleEdit(obj: CustomEmitObj) {
-    console.log(obj);
-    console.log(obj.mode);
     if (obj.mode === false){
-      this.dataService.deleteRoom(obj.element).subscribe(
+      this.dataService.deleteRoom(obj.id).subscribe(
         data => {
            this.getRooms();
         }, error => console.log(error));
     } else {
-      // this.openEditDialogRef = this.dialog.open(EditRoomComponent,
-      //   { data: { room: obj.element } });
+      this.openEditDialogRef = this.dialog.open(EditRoomComponent,
+        { data: { room: obj.element, categories: this.categories } });
   
-      // this.openEditDialogRef
-      //   .afterClosed()
-      //   .subscribe(
-      //     result => {
-      //       console.log(result);
-      //       this.dataService.editRoom(result).subscribe(
-      //         data => console.log(data)
-      //       ),
-      //         error => console.log('error')
-      //     }
-      //   ), error => console.log('error')
+      this.openEditDialogRef
+        .afterClosed()
+        .subscribe(
+          result => {
+            console.log(result);
+            this.dataService.editRoom(result).subscribe(
+              data => this.getRooms()
+            ),
+              error => console.log('error')
+          }
+        ), error => console.log('error')
     }
   }
+
+  openDialogCategories(){
+    this.openCatDialogRef = this.dialog.open(AddCategoryDialogComponent);
+    this.openCatDialogRef
+    .afterClosed()
+    .subscribe(
+      result=> {
+        this.dataService.addCategory(result).subscribe(
+          data=>{
+            this.dataService.categoryWasAdded();
+          }
+        ), error=>console.log('error');
+      }
+    ), error=> console.log('error')
+  };
+
+
 }

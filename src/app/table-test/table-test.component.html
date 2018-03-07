@@ -9,10 +9,10 @@
           <div class="color-strip"></div>
         <mat-header-cell *matHeaderCellDef [ngClass]="'cellWidth'"> </mat-header-cell>
         <mat-cell [ngClass]="'cellWidth'" *matCellDef="let element">
-           <div class="edit-icon-div">
-             <h1>{{element.name}} </h1>
-            <app-edit-menu [element]="element.room_id" (notify)="notify($event)"></app-edit-menu>
-           </div>
+            <div class="edit-icon-div">
+                <h1>{{element.name}} </h1>
+                <app-edit-menu [element]="element" [id]="element.room_id" (notify)="notify($event)"></app-edit-menu>
+            </div>  
            <h3>{{element.category}}</h3>
            <p>{{element.description}}</p>
         </mat-cell>
@@ -23,7 +23,9 @@
       <ng-container  matColumnDef={{col.dayNum}}>
         <mat-header-cell [ngClass]="'celDatelWidth'" *matHeaderCellDef>  </mat-header-cell>
         <mat-cell  [ngClass]="'celDatelWidth'" *matCellDef="let element">
-          <mat-cell [ngClass]="'celDatelWidth'" *ngFor="let bed of element.beds"><div data-id="{{bed.bed_id}}" id="{{bed.bed_id}}" (click)="this.isClassVisible = !this.isClassVisible" [ngClass]="{'my-class': isClassVisible, 'hover': true}">{{bed.bedNum}}<br></div></mat-cell>
+          <mat-cell [ngClass]="'celDatelWidth'" *ngFor="let bed of element.beds">
+            <app-day-cell [bedNum]="bed.bedNum"></app-day-cell>
+          </mat-cell>
         </mat-cell>
       </ng-container>
     </div>

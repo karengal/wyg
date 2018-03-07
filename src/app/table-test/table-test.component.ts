@@ -21,19 +21,11 @@ export class TableTestComponent implements OnInit {
   isClassVisible = false;
 
   ngOnInit() {
-this.dataSourceArray.push(this.dataSource)
+    this.dataSourceArray.push(this.dataSource)
     this.displayedColumns = this.columns;
-    console.log(this.dataSource);
-    console.log(this.displayedColumns);
-    console.log(this.numbersArray);
-/*     this.dataSource = ELEMENT_DATA;
- */  }
+  }
 
   notify(obj:CustomEmitObj){
     this.update.emit(obj);
-  }
-
-  clickedDate(){
-    this.isClassVisible = !this.isClassVisible;
   }
 }
