@@ -18,8 +18,6 @@ import { CalenderService } from './calender.service';
 import { EditMenuComponent } from './edit-menu/edit-menu.component';
 import { EditRoomComponent } from './edit-room/edit-room.component';
 import { DayCellComponent } from './day-cell/day-cell.component';
-import { RoomNameComponent } from './room-name/room-name.component';
-import { EditorBtnsComponent } from './editor-btns/editor-btns.component';
 import { SnackBarComponent } from './snack-bar/snack-bar.component';
 import { AppRoutingModule } from './app-routing/app-routing.module';
 
@@ -35,8 +33,6 @@ import { AppRoutingModule } from './app-routing/app-routing.module';
     EditMenuComponent,
     EditRoomComponent,
     DayCellComponent,
-    RoomNameComponent,
-    EditorBtnsComponent,
     SnackBarComponent
   ],
   imports: [

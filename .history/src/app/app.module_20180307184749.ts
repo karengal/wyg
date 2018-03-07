@@ -21,7 +21,6 @@ import { DayCellComponent } from './day-cell/day-cell.component';
 import { RoomNameComponent } from './room-name/room-name.component';
 import { EditorBtnsComponent } from './editor-btns/editor-btns.component';
 import { SnackBarComponent } from './snack-bar/snack-bar.component';
-import { AppRoutingModule } from './app-routing/app-routing.module';
 
 @NgModule({
   declarations: [
@@ -47,8 +46,7 @@ import { AppRoutingModule } from './app-routing/app-routing.module';
     FormsModule,
     ReactiveFormsModule,
     CommonModule,
-    OverlayModule,
-    AppRoutingModule
+    OverlayModule
   ],
   providers: [DataService, CalenderService],
   bootstrap: [AppComponent],

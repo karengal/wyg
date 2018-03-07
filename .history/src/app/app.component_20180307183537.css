@@ -1,0 +1,11 @@
+mat-toolbar {
+    height: 0;
+    padding-bottom: 56.25%; /* 16:9 */
+    position: relative;
+}
+
+.logo-img {
+    position: absolute;
+    top: 0; left: 0;
+    height: 100%;
+  }
