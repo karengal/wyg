@@ -1,12 +1,12 @@
 .btn-container {
     padding: 1% 0;
     position: fixed;
-    top:0; 
+    top: 100px; 
     text-align: center;
     width: 80%;
     height: 8%;
     background-color: white;
-    z-index: 20;
+    z-index: 45;
     background-color: rgb(0,84,112);
   }
   

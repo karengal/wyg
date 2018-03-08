@@ -22,6 +22,8 @@ import { RoomNameComponent } from './room-name/room-name.component';
 import { EditorBtnsComponent } from './editor-btns/editor-btns.component';
 import { SnackBarComponent } from './snack-bar/snack-bar.component';
 import { AppRoutingModule } from './app-routing/app-routing.module';
+import { LandingPageComponent } from './landing-page/landing-page.component';
+import { ContactComponent } from './contact/contact.component';
 
 @NgModule({
   declarations: [
@@ -37,7 +39,9 @@ import { AppRoutingModule } from './app-routing/app-routing.module';
     DayCellComponent,
     RoomNameComponent,
     EditorBtnsComponent,
-    SnackBarComponent
+    SnackBarComponent,
+    LandingPageComponent,
+    ContactComponent
   ],
   imports: [
     BrowserModule,
