@@ -50,12 +50,13 @@ export class EditRoomComponent {
     .subscribe(
       result=> {
         console.log(result);
+        if (result){
         this.dataService.addCategory(result).subscribe(
           data=>{
             this.dataService.categoryWasAdded();
           }
         ), error=>console.log('error');
-      }
+      }}
     ), error=> console.log('error')
   };
 }

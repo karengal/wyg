@@ -57,6 +57,7 @@ export class AddRoomDialogComponent implements OnInit {
     .afterClosed()
     .subscribe(
       result=> {
+        
         this.dataService.addCategory(result).subscribe(
           data=>{
             this.dataService.categoryWasAdded();

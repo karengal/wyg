@@ -50,6 +50,7 @@ export class ReservationsTableComponent implements OnInit {
   getCategories() {
     this.dataService.getCategories().subscribe(
       data => {
+        console.log(data);
         this.categories = data;
       }
     ), error => console.log('error');

@@ -33,7 +33,7 @@ router.get('/categories', (req, res) => {
       db.getConnection(function (err, connection) {
             connection.query('SELECT categories.category_id, categories.category_name from categories', function (err, rows, fields) {
                   connection.release();
-                  if (!err) res.sendStatus(200);
+                  if (!err) res.send(rows);
                   else throw err;
             })
       })
@@ -45,7 +45,7 @@ router.post('/categories', (req, res) => {
             connection.query('INSERT INTO categories SET ?', { category_name: req.body.category_name, room_type: req.body.room_type }, function (err, rows, fields) {
                   connection.release();
                   if (!err) {
-                        res.sendStatus(200);
+                        res.send(rows);
                   }
                   else throw err;
             })
@@ -57,7 +57,7 @@ router.post('/addroom', (req, res) => {
             connection.query(`CALL add_room('${req.body.description}', '${req.body.name}', ${req.body.category},${req.body.beds})`, function (err, result) {
                   connection.release();
                   if (!err) {
-                        res.sendStatus(200);
+                        res.send(result);
                   }
                   else {
                         res.send(err)
@@ -71,7 +71,7 @@ router.delete('/deleteroom/:roomId', (req, res) => {
             connection.query(`CALL deleteRoom(${req.params.roomId})`, function (err, result) {
                   connection.release()
                   if (!err) {
-                        res.sendStatus(200);
+                        res.send(result);
                   }
                   else {
                         res.send(err)
@@ -84,7 +84,7 @@ router.put('/editroom/:roomId', (req, res) => {
             connection.query(`CALL update_room(${req.params.roomId},'${req.body.description}', '${req.body.name}', ${req.body.category},${req.body.beds})`, function (err, result) {
                   connection.release();
                   if (!err) {
-                        res.sendStatus(200);
+                        res.send(result);
                   }
                   else {
                         res.send(err)
