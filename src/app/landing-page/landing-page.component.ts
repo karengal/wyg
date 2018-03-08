@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { DataService } from '../data.service';
 
 @Component({
   selector: 'app-landing-page',
@@ -7,13 +8,15 @@ import { Component, OnInit } from '@angular/core';
 })
 export class LandingPageComponent implements OnInit {
 
-  constructor() { }
+  constructor(private dataService : DataService) { }
 
   ngOnInit() {
+
   }
 
 onClick(){
   console.log('clicked');
+  this.dataService.enterWasClicked();
 }
 
 }

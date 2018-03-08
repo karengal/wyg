@@ -24,6 +24,7 @@ import { SnackBarComponent } from './snack-bar/snack-bar.component';
 import { AppRoutingModule } from './app-routing/app-routing.module';
 import { LandingPageComponent } from './landing-page/landing-page.component';
 import { ContactComponent } from './contact/contact.component';
+import { RoomsVanueComponent } from './rooms-vanue/rooms-vanue.component';
 
 @NgModule({
   declarations: [
@@ -41,7 +42,8 @@ import { ContactComponent } from './contact/contact.component';
     EditorBtnsComponent,
     SnackBarComponent,
     LandingPageComponent,
-    ContactComponent
+    ContactComponent,
+    RoomsVanueComponent
   ],
   imports: [
     BrowserModule,

@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { MatSnackBar } from '@angular/material';
+import { MatSnackBar, MatSnackBarConfig } from '@angular/material';
 import { SnackBarComponent } from '../snack-bar/snack-bar.component';
 
 @Component({
@@ -20,6 +20,8 @@ export class DayCellComponent implements OnInit {
   }
 
   clickedDate(){
+    let config = new MatSnackBarConfig();
+    config.panelClass = ['snackbar-bg'];
     this.isClassVisible = !this.isClassVisible;
     this.snackBar.openFromComponent(SnackBarComponent, {
       duration: 3000,
