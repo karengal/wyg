@@ -1,4 +1,5 @@
- <div *ngIf="navAppear" class="navbar-wrapper">
+ <div *ngIf="navAppear"
+ [ngClass]="{'navbar-animation': navAppear, 'navbar-wrapper': true}">
 
         <mat-toolbar>
           <mat-toolbar-row>
@@ -11,4 +12,5 @@
         </mat-toolbar>
       </div>
 <router-outlet></router-outlet> 
+
 
