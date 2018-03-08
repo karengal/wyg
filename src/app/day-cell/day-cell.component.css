@@ -7,3 +7,10 @@
     background-color: rgb(248, 178, 143);
     color: white;
   }
+  ::ng-deep snack-bar-container.snackbar-bg {
+    background: yellow;
+  }
+  
+  ::ng-deep .snackbar-bg .mat-simple-snackbar {
+    color: green;
+  }

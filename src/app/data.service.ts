@@ -14,6 +14,7 @@ numbersObjArray = new Array();
 numbersArray = new Array();
 displayedColumns: any[] = ['room'];
 addedCategory : EventEmitter<CategoryModel[]> = new EventEmitter();
+enterClicked : EventEmitter<any> = new EventEmitter();
 
   constructor(private http: HttpClient) { }
 
@@ -48,6 +49,15 @@ return this.http.post<any>('api/reservationsTable/addroom', room);
   categoryWasAdded(){
     this.addedCategory.emit();
   }
+
+  getEnterClickedEmitter(){
+    return this.enterClicked;
+  }
+
+  enterWasClicked(){
+    this.enterClicked.emit();
+  }
+
   editRoom(room):Observable<any>{
     return this.http.put<any>(`api/reservationsTable/editroom/${room.room_id}`, room)
   }

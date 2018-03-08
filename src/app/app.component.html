@@ -1,4 +1,5 @@
- <div class="navbar-wrapper">
+ <div *ngIf="navAppear" class="navbar-wrapper">
+
         <mat-toolbar>
           <mat-toolbar-row>
             <img src="../assets/logo.png" alt="HeaderLogo" class="header-logo">
@@ -9,4 +10,5 @@
           </mat-toolbar-row>
         </mat-toolbar>
       </div>
-<router-outlet></router-outlet>
+<router-outlet></router-outlet> 
+
