@@ -32,6 +32,10 @@
   color: white;
 }
 
+.mat-header-cell.mat-column-room{
+  max-width: 110px;
+}
+
 
   mat-cell {
     margin: 10px 0;
