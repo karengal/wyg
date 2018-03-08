@@ -97,7 +97,6 @@ export class ReservationsTableComponent implements OnInit {
   onChange(){
     this.dataService.searchRoom(this.searchRoom).subscribe((data) =>{
       this.dataSource.data = data;
-      //this.changeDetectorRefs.detectChanges(),
       error=>console.log(error)
     });
   }
