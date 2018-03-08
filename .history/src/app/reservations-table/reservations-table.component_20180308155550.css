@@ -14,7 +14,7 @@
   width: 80%;
   top: 180px;
   position: fixed;
-  z-index: 100;
+  z-index: 50;
   background-color: rgb(253,161,114);
 /*   background: linear-gradient(to top,rgb(253,161,114), rgb(217,128,122));
  */  border:none;
@@ -22,7 +22,7 @@
 
 
 .cellWidth{
-    flex: 0 0 15%;
+    flex: 0 0 12%;
   }
 /* 
   .cellDateWidth {
@@ -105,7 +105,7 @@ color: white;
 
 .spaceup{
   width: 100%;
-  height: 14vw;
+  height: 15vw;
 }
 
 .fa-angle-right, .fa-angle-left {

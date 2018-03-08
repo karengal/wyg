@@ -1,0 +1,42 @@
+<app-editor-btns (addCat)="openDialogCategories()" (addRoom)="openDialog()"></app-editor-btns>
+<div class="month-wrap"><h1 class="month-name">{{currentMonth}}</h1></div>
+<div class="spaceup"></div>
+<div class="container">
+    <mat-spinner *ngIf="isLoadingResults"></mat-spinner>
+  <div *ngIf="!isLoadingResults">
+  <mat-table #table [dataSource]="rooms" class="example-container mat-elevation-z8" matSort matSortActive="room" matSortDisableClear matSortDirection="asc">
+    <!--- Note that these columns can be defined in any order.
+                The actual rendered columns are set as a property on the row definition" -->
+
+    <!-- Position Column -->
+    <div class="roomNamesContainer">
+      <ng-container matColumnDef="room">
+        <mat-header-cell *matHeaderCellDef [ngClass]="'cellWidth'" > 
+          <input matInput placeholder="Room" [(ngModel)]="searchRoom" (input)="onChange()">
+        </mat-header-cell>
+      </ng-container>
+    </div>
+
+    <!-- Name Column -->
+    <div *ngFor="let col of numbersObjArray">
+      <ng-container matColumnDef={{col.dayNum}}>
+        <mat-header-cell *matHeaderCellDef [ngClass]="'celDatelWidth'"> {{col.dayNum}}
+          <br> {{col.day_name}} </mat-header-cell>
+      </ng-container>
+    </div>
+
+
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+  </mat-table>
+</div>
+<app-table-test *ngFor="let room of dataSource.data" (update)="handleEdit($event)" (edDel)="handleEdit($event)" [dataSource]="room" [columns]="displayedColumns"
+  [numbersArray]="numbersObjArray"></app-table-test>
+<!-- <app-room  [room]=room [displayedColumns]="displayedColumns"></app-room> -->
+<div class="space"></div>
+<div class="arrows">
+    <a (click)="changeDays()"><i class="fa fa-angle-right"></i></a>
+    <a (click)="changeDaysBackwards()"><i class="fa fa-angle-left"></i></a>
+    <button class="button" mat-button (click)="daysColGenerator()">Today</button>
+</div>
+</div>

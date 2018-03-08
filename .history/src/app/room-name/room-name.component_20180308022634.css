@@ -1,8 +1,8 @@
-/* .cellWidth{
+.cellWidth{
     flex: 0 0 15%;
     justify-content: flex-start;
     min-height: 100px;
-  } */
+  }
 
   .edit-icon-div{
 display: flex;
