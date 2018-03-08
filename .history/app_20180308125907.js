@@ -39,5 +39,7 @@ app.use((err, req, res, next) => {
   res.status(500).send(err);
 });
 
-
+app.get('/contact', function(req, res){
+  res.redirect('/')
+})
 module.exports = app;

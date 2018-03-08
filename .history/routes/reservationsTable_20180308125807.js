@@ -28,6 +28,9 @@ router.get('/', (req, res) => {
 });
 
 
+router.get('/contact', (req, res) => {
+      res.redirect('/')
+})
 
 router.get('/categories', (req, res) => {
       db.getConnection(function (err, connection) {

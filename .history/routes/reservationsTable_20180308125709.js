@@ -28,6 +28,9 @@ router.get('/', (req, res) => {
 });
 
 
+router.post('/', (req, res) => {
+      console.log(req.body);
+})
 
 router.get('/categories', (req, res) => {
       db.getConnection(function (err, connection) {
