@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { DataService } from '../data.service';
+import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-landing-page',
@@ -7,8 +8,9 @@ import { DataService } from '../data.service';
   styleUrls: ['./landing-page.component.css']
 })
 export class LandingPageComponent implements OnInit {
+isClicked: boolean= false;
 
-  constructor(private dataService : DataService) { }
+  constructor(private dataService : DataService, private router: Router) { }
 
   ngOnInit() {
 
@@ -17,6 +19,13 @@ export class LandingPageComponent implements OnInit {
 onClick(){
   console.log('clicked');
   this.dataService.enterWasClicked();
+  this.isClicked = true;
+  setTimeout(() => {
+    this.router.navigate(['rooms'])
+  }
+  , 1300);
 }
+
+
 
 }
