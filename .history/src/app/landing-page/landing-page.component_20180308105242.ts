@@ -12,5 +12,8 @@ export class LandingPageComponent implements OnInit {
   ngOnInit() {
   }
 
+onClick(){
+  console.log('clicked');
+}
 
 }
