@@ -6,8 +6,8 @@ import { ContactComponent } from '../contact/contact.component';
 import { LandingPageComponent } from '../landing-page/landing-page.component';
 
 const routes: Routes = [
-  {path: '', component: LandingPageComponent},
-  {path: 'rooms', component: HomeComponent},
+  {path: '', component: HomeComponent},
+  {path: 'rooms', component: LandingPageComponent},
   {path: 'contact', component: ContactComponent}
 ]
 @NgModule({
