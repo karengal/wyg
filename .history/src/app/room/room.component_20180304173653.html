@@ -1,0 +1,30 @@
+<mat-table #table [dataSource]="dataSource">
+
+    <!-- firstName Column -->
+    <ng-container matColumnDef="room">
+      <mat-header-cell *matHeaderCellDef></mat-header-cell>
+      <mat-cell *matCellDef="let element">{{element.name}}</mat-cell>
+    </ng-container>
+
+<!--     <ng-container matColumnDef=1>
+        <mat-header-cell *matHeaderCellDef></mat-header-cell>
+        <mat-cell *matCellDef="let element">{{element.beds}}</mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef=2>
+          <mat-header-cell *matHeaderCellDef></mat-header-cell>
+          <mat-cell *matCellDef="let element">{{element.beds}}</mat-cell>
+        </ng-container> -->
+
+    <!-- lastName Column -->
+<!--     <div *ngFor="let col of displayedColumns|slice:1">
+      <p>{{col}}</p> -->
+<!--     <ng-container [matColumnDef]="1">
+      <mat-header-cell *matHeaderCellDef>{{col}} </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.beds}} </mat-cell>
+    </ng-container> -->
+ <!--  </div> -->
+
+ <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+ <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+</mat-table>

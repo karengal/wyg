@@ -29,9 +29,9 @@ export class EditMenuComponent {
   delete(){
     this.editDelete.emit({id: this.id, element: this.element, mode: false});
   }
-/* 
+
   openMenu(obj:CustomEmitObj){
     this.notify.emit(obj)
-  } */
+  }
 }
 
