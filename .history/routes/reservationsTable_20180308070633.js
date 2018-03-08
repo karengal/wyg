@@ -1,7 +1,8 @@
 var express = require('express');
 var router = express.Router();
 var db = require('./db.js');
-const toRoomModel = require('../global_functions.js');
+
+
 
 router.get('/', (req, res) => {
       if (req.query.name === undefined) {
@@ -9,7 +10,9 @@ router.get('/', (req, res) => {
                   connection.query('SELECT beds.room_id, rooms.room_name, roomsdescription.descText, categories.category_name, group_concat(bed_number) as bedArray,group_concat(bed_id) as bedIdArray, group_concat(isAvailable) as availableArray from beds inner join rooms on beds.room_id=rooms.room_id inner join roomsdescription on rooms.description_id=roomsdescription.description_id inner join categories on rooms.category_id=categories.category_id group by room_id', function (err, rows, fields) {
                         connection.release();
                         if (!err) {
-                              res.send(toRoomModel(rows));
+                              newArray = []
+                              toRoomModel(rows);
+                              res.send(newArray);
                         }
                         else throw err;
                   })
@@ -19,7 +22,9 @@ router.get('/', (req, res) => {
                   connection.query('SELECT beds.room_id, rooms.room_name, roomsdescription.descText, categories.category_name, group_concat(bed_number) as bedArray,group_concat(bed_id) as bedIdArray, group_concat(isAvailable) as availableArray from beds inner join rooms on beds.room_id=rooms.room_id inner join roomsdescription on rooms.description_id=roomsdescription.description_id inner join categories on rooms.category_id=categories.category_id where rooms.room_name like "%' + req.query.name + '%"' + 'group by room_id', function (err, rows, fields) {
                         connection.release();
                         if (!err) {
-                              res.send(toRoomModel(rows));
+                              newArray = []
+                              toRoomModel(rows);
+                              res.send(newArray);
                         } else throw err;
                   })
             })

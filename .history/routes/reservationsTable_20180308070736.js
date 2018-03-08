@@ -1,7 +1,8 @@
 var express = require('express');
 var router = express.Router();
 var db = require('./db.js');
-const toRoomModel = require('../global_functions.js');
+
+
 
 router.get('/', (req, res) => {
       if (req.query.name === undefined) {
