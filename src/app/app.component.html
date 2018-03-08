@@ -1,16 +1,4 @@
-<mat-toolbar color="primary">
-  <mat-toolbar-row>
-    <img src="../assets/logo.png" alt="HeaderLogo" class="header-logo">
-    <span>Who's Your Guest</span>
-    <span class="example-fill-remaining-space"></span>
-    <a mat-button routerLink="/rooms">View Rooms</a>
-    <a mat-button routerLink="/contact">Contact</a>
-  </mat-toolbar-row>
-</mat-toolbar>
-
-<!-- <app-reservations-table class="main-theme table-wrap scrollbar mat-typography app-frame mat-app-background"></app-reservations-table>
- -->
- <div class="navbar-wrapper">
+ <div *ngIf="navAppear" class="navbar-wrapper">
         <mat-toolbar>
           <mat-toolbar-row>
             <img src="../assets/logo.png" alt="HeaderLogo" class="header-logo">
@@ -21,8 +9,4 @@
           </mat-toolbar-row>
         </mat-toolbar>
       </div>
-<!--       <router-outlet></router-outlet>
- -->    
-<app-landing-page></app-landing-page>
-<!-- <app-contact></app-contact>
- --><!-- <app-home></app-home> -->
+<router-outlet></router-outlet> 
