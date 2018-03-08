@@ -73,25 +73,11 @@ html, body, app-root, .app-frame {
     background-color: rgb(253,161,114)
 }
 
-.form-wrap {
-    width: 500px;
-    padding: 20px;
+.form-wrap, mat-dialog-container {
+    display: flex;
+    flex-direction: column;
   }
   
-.form-wrap form {
-    overflow: hidden;
-    padding: 10px;
-}
-
-
-.mat-dialog-content {
-    display: block;
-}
-
-.mat-dialog-content .mat-form-field {
-    display: block;
-}
-
-div.mat-input-infix.mat-form-field-infix textarea {
-    resize: none;
-}
+  .form-wrap form > * {
+    width: 100%;
+  }

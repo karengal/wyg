@@ -79,19 +79,11 @@ html, body, app-root, .app-frame {
   }
   
 .form-wrap form {
-    overflow: hidden;
     padding: 10px;
 }
 
 
-.mat-dialog-content {
-    display: block;
-}
-
-.mat-dialog-content .mat-form-field {
-    display: block;
-}
-
-div.mat-input-infix.mat-form-field-infix textarea {
-    resize: none;
+.mat-form-field-infix {
+    width: 240px;
+    min-width: 100px;
 }
