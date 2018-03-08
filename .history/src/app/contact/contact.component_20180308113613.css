@@ -1,4 +1,4 @@
-h1, h2{
+h1{
     font-family: 'roboto';
     text-transform: uppercase;
 /*     margin-bottom: -0.2%;
@@ -14,25 +14,18 @@ h1, h2{
  }
 
  .example-card {
-    margin: 20px;
-    max-width: 300px;
-    float: left;
+    max-width: 400px;
   }
   
   .example-header-image-ceo {
-    background-image: url('../../assets/faces/CEO.jpg');
+    background-image: url('/src/assets/faces/CEO.jpg');
     background-size: cover;
   }
   .example-header-image-cr {
-    background-image: url('../../assets/faces/womanCS.jpg');
+    background-image: url('/src/assets/faces/womanCS.jpg');
     background-size: cover;
   }
   .example-header-image-ts {
-    background-image: url('../../assets/faces/itguy.jpg');
+    background-image: url('/src/assets/faces/itguy.jpg');
     background-size: cover;
   }
-
-  .layout-row{
-    display: flex;
-    align-items: stretch;
-}

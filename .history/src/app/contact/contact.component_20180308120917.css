@@ -1,4 +1,4 @@
-h1, h2{
+h1{
     font-family: 'roboto';
     text-transform: uppercase;
 /*     margin-bottom: -0.2%;
@@ -14,8 +14,7 @@ h1, h2{
  }
 
  .example-card {
-    margin: 20px;
-    max-width: 300px;
+    max-width: 400px;
     float: left;
   }
   
@@ -31,8 +30,3 @@ h1, h2{
     background-image: url('../../assets/faces/itguy.jpg');
     background-size: cover;
   }
-
-  .layout-row{
-    display: flex;
-    align-items: stretch;
-}
