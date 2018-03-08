@@ -35,4 +35,5 @@ h1, h2{
   .layout-row{
     display: flex;
     align-items: stretch;
+    justify-content: space-around;
 }
